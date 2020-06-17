@@ -1,0 +1,81 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 21 * * *' # at 6:00 AM (Asia/Tokyo)
+
+jobs:
+  compile:
+    name: Compile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --ignore-optional
+      - name: Compile
+        run: yarn build
+
+  test:
+    name: Test (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node:
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --ignore-optional
+      - name: Test
+        run: yarn jest
+
+  release:
+    name: Release
+    needs: [compile, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --ignore-optional
+      - name: Build
+        run: yarn build
+      - name: Contents of package
+        run: yarn pack:preview
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn semantic-release
+      - name: Check reference existence
+        id: check_reference
+        uses: andstor/file-existence-action@v1
+        with:
+          files: 'reference'
+      - name: Publish API reference
+        uses: peaceiris/actions-gh-pages@v3
+        if: steps.check_reference.outputs.files_exists == 'true'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reference

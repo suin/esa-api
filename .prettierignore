@@ -1,0 +1,13 @@
+#
+# IDEs & editors
+#
+/.idea
+
+#
+# Generated files
+#
+/CHANGELOG.md
+/reference
+*.d.ts
+# project level type definition shouldn't be ignored.
+!/types/**/*.d.ts
