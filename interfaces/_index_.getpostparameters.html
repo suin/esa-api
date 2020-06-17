@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PaginationParameters | @suin/esa-api - v1.1.0</title>
+	<title>GetPostParameters | @suin/esa-api - v1.1.0</title>
 	<meta name="description" content="Documentation for @suin/esa-api - v1.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,21 +59,30 @@
 					<a href="../modules/_index_.html">&quot;index&quot;</a>
 				</li>
 				<li>
-					<a href="_index_.paginationparameters.html">PaginationParameters</a>
+					<a href="_index_.getpostparameters.html">GetPostParameters</a>
 				</li>
 			</ul>
-			<h1>Interface PaginationParameters</h1>
+			<h1>Interface GetPostParameters</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>GET /v1/teams/:team_name/posts/:post_numberに指定できるURIクエリ文字列</p>
+					</div>
+					<p>公式ドキュメント: <a href="https://docs.esa.io/posts/102#URI%E3%82%AF%E3%82%A8%E3%83%AA%E6%96%87%E5%AD%97%E5%88%97-2">dev/esa/api/v1 #noexpand -
+					docs.esa.io</a></p>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PaginationParameters</span>
+						<span class="target">GetPostParameters</span>
 					</li>
 				</ul>
 			</section>
@@ -84,8 +93,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.paginationparameters.html#page" class="tsd-kind-icon">page</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.paginationparameters.html#per_page" class="tsd-kind-icon">per_<wbr>page</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.getpostparameters.html#include" class="tsd-kind-icon">include</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,24 +102,25 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="page" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> page</h3>
-					<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="include" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> include</h3>
+					<div class="tsd-signature tsd-kind-icon">include<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">"comments"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"comments.stargazers"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"stargazers"</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v1.1.0/index.ts#L271">index.ts:271</a></li>
+							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v1.1.0/index.ts#L265">index.ts:265</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="per_page" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> per_<wbr>page</h3>
-					<div class="tsd-signature tsd-kind-icon">per_<wbr>page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>記事の関連情報を含めることができます。</p>
+						</div>
 						<ul>
-							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v1.1.0/index.ts#L272">index.ts:272</a></li>
+							<li><code>comments</code> を指定するとコメントの配列を含んだレスポンスを返します。</li>
+							<li><code>comments,comments.stargazers</code>を指定するとコメントとコメントに対するStarの配列を含んだレスポンスを返します。</li>
+							<li><code>stargazers</code> を指定するとStarの配列を含んだレスポンスを返します。</li>
+							<li>複数指定できます。</li>
 						</ul>
-					</aside>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -134,30 +143,27 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_index_.comment.html" class="tsd-kind-icon">Comment</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="_index_.getpostparameters.html" class="tsd-kind-icon">Get<wbr>Post<wbr>Parameters</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.getpostparameters.html#include" class="tsd-kind-icon">include</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_index_.getpostsparameters.html" class="tsd-kind-icon">Get<wbr>Posts<wbr>Parameters</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_index_.paginateddata.html" class="tsd-kind-icon">Paginated<wbr>Data</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_index_.paginationparameters.html" class="tsd-kind-icon">Pagination<wbr>Parameters</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.paginationparameters.html#page" class="tsd-kind-icon">page</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.paginationparameters.html#per_page" class="tsd-kind-icon">per_<wbr>page</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_index_.post.html" class="tsd-kind-icon">Post</a>
 					</li>
