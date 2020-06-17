@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/esa-api.iml" filepath="$PROJECT_DIR$/.idea/esa-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../gatsby-source-esa/.idea/gatsby-source-esa.iml" filepath="$PROJECT_DIR$/../gatsby-source-esa/.idea/gatsby-source-esa.iml" />
     </modules>
   </component>
 </project>

@@ -14,6 +14,9 @@ class Client {
   readonly axios: AxiosInstance
   private readonly team: string
 
+  /**
+   * @internal
+   */
   constructor({
     team,
     token,
@@ -24,12 +27,12 @@ class Client {
     this.team = team
     this.axios = axios.create({ baseURL: 'https://api.esa.io/v1' })
     this.axios.interceptors.request.use(enheadAuthorization(token))
-    this.axios.interceptors.response.use(embodyRatelimit)
-    this.axios.interceptors.response.use(embodyTeamName(team))
+    this.axios.interceptors.response.use(extendResponse)
+    this.axios.interceptors.response.use(setRatelimit)
   }
 
   /**
-   * 投稿リストを取得する
+   * 記事一覧を取得する
    */
   async getPosts({
     q,
@@ -40,12 +43,33 @@ class Client {
     per_page,
   }: GetPostsParameters & PaginationParameters = {}): Promise<PostsPayload> {
     const include = includeArray ? includeArray.join(',') : undefined
-    const { data } = await this.axios.request({
+    const response = await this.axios.request({
       method: 'GET',
       url: `/teams/${this.team}/posts`,
       params: { q, include, sort, order, page, per_page },
     })
-    return data
+
+    const { ratelimit } = response[esa]
+    return { ...response.data, team: this.team, ratelimit }
+  }
+
+  /**
+   * 指定された記事を取得する
+   * @param postNumber 記事番号
+   * @param params [[GetPostParameters]]参照
+   */
+  async getPost(
+    postNumber: number,
+    params?: GetPostParameters,
+  ): Promise<PostPayload> {
+    const include = params?.include?.join(',') ?? undefined
+    const response = await this.axios.request({
+      method: 'GET',
+      url: `/teams/${this.team}/posts/${postNumber}`,
+      params: { include },
+    })
+    const { ratelimit } = response[esa]
+    return { post: response.data, team: this.team, ratelimit }
   }
 }
 
@@ -64,7 +88,15 @@ const enheadAuthorization = (token: string) => (
 /**
  * @internal
  */
-const embodyRatelimit = (response: AxiosResponse): AxiosResponse => {
+const extendResponse = (response: AxiosResponse): AxiosResponse => {
+  response[esa] = {} as AxiosResponse[typeof esa]
+  return response
+}
+
+/**
+ * @internal
+ */
+const setRatelimit = (response: AxiosResponse): AxiosResponse => {
   const limit = parseInt(response.headers['x-ratelimit-limit'])
   const remaining = parseInt(response.headers['x-ratelimit-remaining'])
   const reset = parseInt(response.headers['x-ratelimit-reset'])
@@ -73,7 +105,7 @@ const embodyRatelimit = (response: AxiosResponse): AxiosResponse => {
     Number.isInteger(remaining) &&
     Number.isInteger(reset)
   ) {
-    response.data.ratelimit = {
+    response[esa].ratelimit = {
       limit,
       remaining,
       reset: new Date(reset * 1000),
@@ -82,18 +114,14 @@ const embodyRatelimit = (response: AxiosResponse): AxiosResponse => {
   return response
 }
 
-/**
- * @internal
- */
-const embodyTeamName = (team: string) => (
-  response: AxiosResponse,
-): AxiosResponse => {
-  response.data.team = team
-  return response
-}
-
 export interface PostsPayload extends PaginatedData {
   posts: Post[]
+  ratelimit: Ratelimit
+  team: string
+}
+
+export interface PostPayload {
+  post: Post
   ratelimit: Ratelimit
   team: string
 }
@@ -168,7 +196,8 @@ export interface User {
 /**
  * GET /v1/teams/:team_name/postsに指定できるURIクエリ文字列
  *
- * 公式ドキュメント: [dev/esa/api/v1 #noexpand - docs.esa.io](https://docs.esa.io/posts/102#URI%E3%82%AF%E3%82%A8%E3%83%AA%E6%96%87%E5%AD%97%E5%88%97-1)
+ * 公式ドキュメント: [dev/esa/api/v1 #noexpand -
+ * docs.esa.io](https://docs.esa.io/posts/102#URI%E3%82%AF%E3%82%A8%E3%83%AA%E6%96%87%E5%AD%97%E5%88%97-1)
  */
 export interface GetPostsParameters {
   /**
@@ -179,7 +208,7 @@ export interface GetPostsParameters {
   readonly q?: string
 
   /**
-   * 投稿の関連情報を含めることができます。
+   * 記事の関連情報を含めることができます。
    *
    * - `comments` を指定するとコメントの配列を含んだレスポンスを返します。
    * - `stargazers` を指定するとStarの配列を含んだレスポンスを返します。
@@ -190,7 +219,7 @@ export interface GetPostsParameters {
   >
 
   /**
-   * 投稿の並び順
+   * 記事の並び順
    *
    * - `updated` (default): 記事の更新日時
    * - `created`: 記事の作成日時
@@ -218,6 +247,26 @@ export interface GetPostsParameters {
   readonly order?: 'desc' | 'asc'
 }
 
+/**
+ * GET /v1/teams/:team_name/posts/:post_numberに指定できるURIクエリ文字列
+ *
+ * 公式ドキュメント: [dev/esa/api/v1 #noexpand -
+ * docs.esa.io](https://docs.esa.io/posts/102#URI%E3%82%AF%E3%82%A8%E3%83%AA%E6%96%87%E5%AD%97%E5%88%97-2)
+ */
+export interface GetPostParameters {
+  /**
+   * 記事の関連情報を含めることができます。
+   *
+   * - `comments` を指定するとコメントの配列を含んだレスポンスを返します。
+   * - `comments,comments.stargazers`を指定するとコメントとコメントに対するStarの配列を含んだレスポンスを返します。
+   * - `stargazers` を指定するとStarの配列を含んだレスポンスを返します。
+   * - 複数指定できます。
+   */
+  readonly include?: ReadonlyArray<
+    'comments' | 'comments.stargazers' | 'stargazers'
+  >
+}
+
 export interface PaginationParameters {
   readonly page?: number
   readonly per_page?: number
@@ -227,4 +276,20 @@ export interface Ratelimit {
   limit: number
   remaining: number
   reset: Date
+}
+
+/**
+ * @internal
+ */
+const esa = Symbol('esa')
+
+/**
+ * @internal
+ */
+declare module 'axios' {
+  export interface AxiosResponse<T = any> {
+    [esa]: {
+      ratelimit: Ratelimit
+    }
+  }
 }

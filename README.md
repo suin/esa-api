@@ -4,7 +4,9 @@ esa.io API のクライアントライブラリ。
 
 ## 特徴
 
-- 現在、投稿リストの取得のみに対応しています。
+- 現在、以下のエンドポイントにのみに対応しています。
+  - GET /v1/teams/:team_name/posts (記事一覧の取得)
+  - GET /v1/teams/:team_name/posts/:post_number (指定された記事の取得)
 
 ## インストール
 
@@ -24,8 +26,10 @@ const client = createClient({
   team: 'foo', // チーム名
   token: process.env.ESA_TOKEN, // アクセストーン
 })
-// 投稿一覧を取得する
+// 記事一覧を取得する
 const { posts } = await client.getPosts()
+// 指定した記事を取得する
+const { post } = await client.getPost(1)
 ```
 
 複雑なクエリの例:
@@ -37,7 +41,7 @@ const client = createClient({
   token: process.env.ESA_TOKEN,
 })
 
-// 細かい条件を設定して投稿一覧を取得する
+// 細かい条件を設定して記事一覧を取得する
 const result = await client.getPosts({
   q: 'wip:false',
   include: ['comments', 'comments.stargazers', 'stargazers'],
@@ -48,7 +52,7 @@ const result = await client.getPosts({
 })
 
 // 結果からは様々な付随情報が得られます:
-// 1. 投稿リスト
+// 1. 記事一覧
 const { posts } = result
 // 2. チーム名
 const { team } = result

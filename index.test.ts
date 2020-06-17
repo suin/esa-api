@@ -21,10 +21,18 @@ describe('esaApi', () => {
       )
       return
     }
-    test('get one post', async () => {
+    beforeEach(() => {
       client = createClient({ team, token })
+    })
+
+    test('get one post', async () => {
       const { posts } = await client.getPosts({ per_page: 1 })
       expect(posts.length).toBe(1)
+    })
+
+    test('get a post by number', async () => {
+      const { post } = await client.getPost(1)
+      expect(post.number).toBe(1)
     })
   })
 
@@ -38,7 +46,7 @@ describe('esaApi', () => {
     })
   })
 
-  describe('posts', () => {
+  describe('getPosts', () => {
     test('request parameters', async () => {
       mock.onGet('/teams/acme/posts').replyOnce(({ params }) => {
         expect(params).toEqual({
@@ -105,7 +113,7 @@ describe('esaApi', () => {
       expect(data2.posts[0]).toEqual(post2)
     })
 
-    test('embody ratelimit', async () => {
+    test('ratelimit', async () => {
       mock.onGet('/teams/acme/posts').replyOnce<Partial<PostsPayload>>(
         200,
         {
@@ -126,7 +134,55 @@ describe('esaApi', () => {
     })
   })
 
-  test('embody team name', async () => {
+  describe('getPost', () => {
+    test('get a specific post', async () => {
+      mock
+        .onGet('/teams/acme/posts/1')
+        .replyOnce<Partial<Post>>(200, { number: 1 }, {})
+      const data = await client.getPost(1)
+      expect(data.post.number).toBe(1)
+    })
+
+    test('get a specific post with comments', async () => {
+      mock
+        .onGet('/teams/acme/posts/1', { params: { include: 'comments' } })
+        .replyOnce<Partial<Post>>(200, { number: 1 }, {})
+      const data = await client.getPost(1, { include: ['comments'] })
+      expect(data.post.number).toBe(1)
+    })
+
+    test('get a specific post with comments and stargazers', async () => {
+      mock
+        .onGet('/teams/acme/posts/1', {
+          params: { include: 'comments,stargazers' },
+        })
+        .replyOnce<Partial<Post>>(200, { number: 1 }, {})
+      const data = await client.getPost(1, {
+        include: ['comments', 'stargazers'],
+      })
+      expect(data.post.number).toBe(1)
+    })
+
+    test('ratelimit', async () => {
+      mock.onGet('/teams/acme/posts/1').replyOnce<Partial<Post>>(
+        200,
+        { number: 1 },
+        {
+          'x-ratelimit-limit': '75',
+          'x-ratelimit-remaining': '73',
+          'x-ratelimit-reset': '1589974200',
+        },
+      )
+      const { ratelimit } = await client.getPost(1)
+      expect(ratelimit).toEqual({
+        limit: 75,
+        remaining: 73,
+        reset: new Date(1589974200 * 1000),
+      })
+    })
+  })
+
+  test('team name', async () => {
     mock.onGet('/teams/acme/posts').replyOnce<Partial<PostsPayload>>(
       200,
       {
