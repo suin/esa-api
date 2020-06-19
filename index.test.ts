@@ -32,7 +32,7 @@ describe('esaApi', () => {
 
     test('get a post by number', async () => {
       const { post } = await client.getPost(1)
-      expect(post.number).toBe(1)
+      expect(post!.number).toBe(1)
     })
   })
 
@@ -140,7 +140,7 @@ describe('esaApi', () => {
         .onGet('/teams/acme/posts/1')
         .replyOnce<Partial<Post>>(200, { number: 1 }, {})
       const data = await client.getPost(1)
-      expect(data.post.number).toBe(1)
+      expect(data.post!.number).toBe(1)
     })
 
     test('get a specific post with comments', async () => {
@@ -148,7 +148,7 @@ describe('esaApi', () => {
         .onGet('/teams/acme/posts/1', { params: { include: 'comments' } })
         .replyOnce<Partial<Post>>(200, { number: 1 }, {})
       const data = await client.getPost(1, { include: ['comments'] })
-      expect(data.post.number).toBe(1)
+      expect(data.post!.number).toBe(1)
     })
 
     test('get a specific post with comments and stargazers', async () => {
@@ -160,13 +160,43 @@ describe('esaApi', () => {
       const data = await client.getPost(1, {
         include: ['comments', 'stargazers'],
       })
-      expect(data.post.number).toBe(1)
+      expect(data.post!.number).toBe(1)
+    })
+
+    test('not found', async () => {
+      mock.onGet('/teams/acme/posts/1').replyOnce(404, {
+        error: 'not_found',
+        message: 'Not Found',
+      })
+      const data = await client.getPost(1)
+      expect(data.post).toBe(undefined)
     })
 
     test('ratelimit', async () => {
       mock.onGet('/teams/acme/posts/1').replyOnce<Partial<Post>>(
         200,
         { number: 1 },
+        {
+          'x-ratelimit-limit': '75',
+          'x-ratelimit-remaining': '73',
+          'x-ratelimit-reset': '1589974200',
+        },
+      )
+      const { ratelimit } = await client.getPost(1)
+      expect(ratelimit).toEqual({
+        limit: 75,
+        remaining: 73,
+        reset: new Date(1589974200 * 1000),
+      })
+    })
+
+    test('ratelimit and not found', async () => {
+      mock.onGet('/teams/acme/posts/1').replyOnce(
+        404,
+        {
+          error: 'not_found',
+          message: 'Not Found',
+        },
         {
           'x-ratelimit-limit': '75',
           'x-ratelimit-remaining': '73',

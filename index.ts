@@ -1,4 +1,10 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios'
+import { isObject } from '@suin/is-object'
 
 export const createClient = ({
   team,
@@ -27,8 +33,7 @@ class Client {
     this.team = team
     this.axios = axios.create({ baseURL: 'https://api.esa.io/v1' })
     this.axios.interceptors.request.use(enheadAuthorization(token))
-    this.axios.interceptors.response.use(extendResponse)
-    this.axios.interceptors.response.use(setRatelimit)
+    this.axios.interceptors.response.use(setRatelimit, setRatelimit)
   }
 
   /**
@@ -63,13 +68,21 @@ class Client {
     params?: GetPostParameters,
   ): Promise<PostPayload> {
     const include = params?.include?.join(',') ?? undefined
-    const response = await this.axios.request({
-      method: 'GET',
-      url: `/teams/${this.team}/posts/${postNumber}`,
-      params: { include },
-    })
-    const { ratelimit } = response[esa]
-    return { post: response.data, team: this.team, ratelimit }
+    try {
+      const response = await this.axios.request({
+        method: 'GET',
+        url: `/teams/${this.team}/posts/${postNumber}`,
+        params: { include },
+      })
+      const { ratelimit } = response[esa]
+      return { post: response.data, team: this.team, ratelimit }
+    } catch (e) {
+      if (!isAxiosError(e) || e.response?.status !== 404) {
+        throw e
+      }
+      const { ratelimit } = e.response[esa]
+      return { team: this.team, ratelimit }
+    }
   }
 }
 
@@ -88,18 +101,30 @@ const enheadAuthorization = (token: string) => (
 /**
  * @internal
  */
-const extendResponse = (response: AxiosResponse): AxiosResponse => {
-  response[esa] = {} as AxiosResponse[typeof esa]
-  return response
-}
-
-/**
- * @internal
- */
-const setRatelimit = (response: AxiosResponse): AxiosResponse => {
-  const limit = parseInt(response.headers['x-ratelimit-limit'])
-  const remaining = parseInt(response.headers['x-ratelimit-remaining'])
-  const reset = parseInt(response.headers['x-ratelimit-reset'])
+function setRatelimit(response: AxiosResponse): AxiosResponse
+function setRatelimit<T>(error: T): Promise<T>
+function setRatelimit<T>(
+  responseOrError: AxiosResponse | T,
+): AxiosResponse | Promise<T> {
+  let response: AxiosResponse | undefined
+  let returns: AxiosResponse | Promise<T>
+  if ('headers' in responseOrError) {
+    response = responseOrError
+    returns = responseOrError
+  } else {
+    returns = Promise.reject(responseOrError)
+    response =
+      isAxiosError(responseOrError) && isObject(responseOrError.response)
+        ? responseOrError.response
+        : undefined
+  }
+  if (response === undefined) {
+    return returns
+  }
+  response[esa] = response[esa] || {}
+  const limit = parseInt(response.headers?.['x-ratelimit-limit'])
+  const remaining = parseInt(response.headers?.['x-ratelimit-remaining'])
+  const reset = parseInt(response.headers?.['x-ratelimit-reset'])
   if (
     Number.isInteger(limit) &&
     Number.isInteger(remaining) &&
@@ -111,7 +136,7 @@ const setRatelimit = (response: AxiosResponse): AxiosResponse => {
       reset: new Date(reset * 1000),
     }
   }
-  return response
+  return returns
 }
 
 export interface PostsPayload extends PaginatedData {
@@ -121,7 +146,12 @@ export interface PostsPayload extends PaginatedData {
 }
 
 export interface PostPayload {
-  post: Post
+  /**
+   * 記事データ
+   *
+   * 記事が存在しない場合`undefined`になる
+   */
+  post?: Post
   ratelimit: Ratelimit
   team: string
 }
@@ -293,3 +323,6 @@ declare module 'axios' {
     }
   }
 }
+
+const isAxiosError = (error: unknown): error is AxiosError =>
+  isObject<AxiosError>(error) && error.isAxiosError === true
