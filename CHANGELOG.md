@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/suin/esa-api/compare/v1.1.0...v2.0.0) (2020-06-19)
+
+
+### Features
+
+* 🎸 treat 404 error on getPost() as a non-error path ([7f612fb](https://github.com/suin/esa-api/commit/7f612fb7ffb0bc6a8b5d1ca9d71e34dd6d271990))
+
+
+### BREAKING CHANGES
+
+* 🧨 getPost()の戻り値の型に下位互換性が無くなりました。
+
 # [1.1.0](https://github.com/suin/esa-api/compare/v1.0.0...v1.1.0) (2020-06-17)
 
 
