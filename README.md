@@ -28,24 +28,32 @@ const client = createClient({
   team: 'foo', // チーム名
   token: process.env.ESA_TOKEN, // アクセストーン
 })
-// 記事一覧を取得する
-const { posts } = await client.getPosts()
-// 指定した記事を取得する
-const { post1 } = await client.getPost(1)
-// 記事を新規投稿する
-const { post2 } = await client.createPost({
-  name: 'hi!',
-  body_md: '# Getting Started\n',
-  tags: ['api', 'dev'],
-  category: 'dev/2015/05/10',
-  wip: false,
-  message: 'Add Getting Started section',
-})
-// 指定した記事を編集する
-const { post3 } = await client.updatePost(1, {
-  wip: false,
-  message: 'Ship it!',
-})
+{
+  // 記事一覧を取得する
+  const { posts } = await client.getPosts()
+}
+{
+  // 指定した記事を取得する
+  const { post } = await client.getPost(1)
+}
+{
+  // 記事を新規投稿する
+  const { post } = await client.createPost({
+    name: 'hi!',
+    body_md: '# Getting Started\n',
+    tags: ['api', 'dev'],
+    category: 'dev/2015/05/10',
+    wip: false,
+    message: 'Add Getting Started section',
+  })
+}
+{
+  // 指定した記事を編集する
+  const { post } = await client.updatePost(1, {
+    wip: false,
+    message: 'Ship it!',
+  })
+}
 ```
 
 複雑なクエリの例:
