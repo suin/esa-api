@@ -86,6 +86,32 @@ class Client {
   }
 
   /**
+   * 記事を新たに投稿します。
+   */
+  async createPost(
+    post: CreatePostParameters['post'],
+  ): Promise<CreatePostResult> {
+    const data: CreatePostParameters = {
+      post: { ...post, name: escapePostName(post.name) },
+    }
+    console.log(data)
+    const response = await this.axios.request<CreatePostResult['post']>({
+      method: 'POST',
+      url: `/teams/${this.team}/posts`,
+      data,
+    })
+    const { ratelimit } = response[esa]
+    return {
+      post: {
+        ...response.data,
+        name: removeEscapePostName(response.data.name),
+      },
+      team: this.team,
+      ratelimit,
+    }
+  }
+
+  /**
    * 指定された記事を編集します。
    */
   async updatePost(
@@ -173,6 +199,38 @@ export interface PostPayload {
   team: string
 }
 
+export type CreatePostParameters = {
+  readonly post: {
+    /**
+     * タイトル
+     *
+     * `#`→`&35;`に`/`は`&#49;`に置換されます。
+     */
+    readonly name: string
+    readonly body_md?: string
+    readonly tags?: ReadonlyArray<string>
+    readonly category?: string
+    readonly wip?: boolean
+    readonly message?: string
+    /**
+     * チームメンバーのscreen_nameもしくは "esa_bot" を指定することで記事の投稿者を上書きすることができます。
+     * このパラメータは team の owner だけ が使用することができます。
+     */
+    readonly user?: string | 'esa_bot'
+    /**
+     * チーム内のテンプレート記事のID(URLのこの部分:
+     * /posts/{id})を指定すると、そのテンプレートが適用されたnameとbodyを持つ記事を作成することが出来ます。
+     */
+    readonly template_post_id?: number
+  }
+}
+
+export type CreatePostResult = {
+  post: Post
+  ratelimit: Ratelimit
+  team: string
+}
+
 /**
  * 記事編集のパラメータ
  */
@@ -195,9 +253,11 @@ export interface UpdatePostParameters {
      */
     updated_by?: string | 'esa_bot'
     /**
-     * リクエストに正常な `post.body_md` パラメータと `post.original_revision.*` パラメータが存在する場合、記事更新時に3 way mergeが行われます。
+     * リクエストに正常な `post.body_md` パラメータと `post.original_revision.*`
+     * パラメータが存在する場合、記事更新時に3 way mergeが行われます。
      * `original_revision`パラメータが存在しない場合は、変更は常に後勝ちになります。
-     * [ReleaseNotes/2014/12/23/記事保存時の自動マージ - docs.esa.io](https://docs.esa.io/posts/35)
+     * [ReleaseNotes/2014/12/23/記事保存時の自動マージ -
+     * docs.esa.io](https://docs.esa.io/posts/35)
      */
     original_revision?: {
       /**
@@ -402,3 +462,11 @@ declare module 'axios' {
 
 const isAxiosError = (error: unknown): error is AxiosError =>
   isObject<AxiosError>(error) && error.isAxiosError === true
+
+const escapePostName = (name: string): string => {
+  return name.replace('#', '&#35;').replace('/', '&#47;')
+}
+
+const removeEscapePostName = (escapedName: string): string => {
+  return escapedName.replace('&#35;', '#').replace('&#47;', '/')
+}

@@ -2,6 +2,8 @@ import MockAdapter from 'axios-mock-adapter'
 import {
   Client,
   createClient,
+  CreatePostParameters,
+  CreatePostResult,
   Post,
   PostsPayload,
   UpdatePostParameters,
@@ -40,6 +42,17 @@ describe('esaApi', () => {
     test('get a post by number', async () => {
       const { post } = await client.getPost(1)
       expect(post!.number).toBe(1)
+    })
+
+    describe('createPost', () => {
+      test('create a post', async () => {
+        const { post } = await client.createPost({
+          name: 'New Post',
+          body_md: 'New Post Body',
+          category: 'esa-api-test',
+        })
+        expect(post.name).toBe('New Post')
+      })
     })
 
     describe('updatePost', () => {
@@ -234,6 +247,58 @@ describe('esaApi', () => {
         remaining: 73,
         reset: new Date(1589974200 * 1000),
       })
+    })
+  })
+
+  describe('createPost', () => {
+    test('create a post', async () => {
+      const reqBody: CreatePostParameters = { post: { name: 'title' } }
+      const resBody: Partial<CreatePostResult['post']> = {
+        number: 1,
+        name: 'title',
+      }
+      mock.onPost('/teams/acme/posts', reqBody).replyOnce(200, resBody, {})
+      const data = await client.createPost({ name: 'title' })
+      expect(data.post.number).toBe(1)
+    })
+
+    test('create a post with full params', async () => {
+      const post: Required<CreatePostParameters['post']> = {
+        name: 'new name',
+        tags: ['tag1'],
+        wip: true,
+        body_md: 'body',
+        category: 'category name',
+        message: 'message',
+        user: 'esa_bot',
+        template_post_id: 123,
+      }
+      const reqBody: CreatePostParameters = { post }
+      const resBody: Partial<CreatePostResult['post']> = {
+        wip: true,
+        name: 'title',
+      }
+      mock.onPost('/teams/acme/posts', reqBody).replyOnce(200, resBody, {})
+      const data = await client.createPost(post)
+      expect(data.post.wip).toBe(true)
+    })
+
+    test('slash in name is replaced with &#47;', async () => {
+      const reqBody: CreatePostParameters = { post: { name: 'foo&#47;bar' } }
+      const resBody: Partial<CreatePostResult['post']> = { name: 'foo&#47;bar' }
+      mock.onPost('/teams/acme/posts', reqBody).replyOnce(200, resBody, {})
+      const data = await client.createPost({ name: 'foo/bar' })
+      expect(data.post.name).toBe('foo/bar')
+    })
+
+    test('sharp in name is replaced with &#35;', async () => {
+      const reqBody: CreatePostParameters = { post: { name: 'sharp is &#35;' } }
+      const resBody: Partial<CreatePostResult['post']> = {
+        name: 'sharp is &#35;',
+      }
+      mock.onPost('/teams/acme/posts', reqBody).replyOnce(200, resBody, {})
+      const data = await client.createPost({ name: 'sharp is #' })
+      expect(data.post.name).toBe('sharp is #')
     })
   })
 

@@ -7,6 +7,7 @@ esa.io API のクライアントライブラリ。
 - 現在、以下のエンドポイントにのみに対応しています。
   - GET /v1/teams/:team_name/posts (記事一覧の取得)
   - GET /v1/teams/:team_name/posts/:post_number (指定された記事の取得)
+  - POST /v1/teams/:team_name/posts (記事の新規投稿)
   - PATCH /v1/teams/:team_name/posts/:post_number (指定された記事の編集)
 
 ## インストール
@@ -31,8 +32,17 @@ const client = createClient({
 const { posts } = await client.getPosts()
 // 指定した記事を取得する
 const { post1 } = await client.getPost(1)
+// 記事を新規投稿する
+const { post2 } = await client.createPost({
+  name: 'hi!',
+  body_md: '# Getting Started\n',
+  tags: ['api', 'dev'],
+  category: 'dev/2015/05/10',
+  wip: false,
+  message: 'Add Getting Started section',
+})
 // 指定した記事を編集する
-const { post2 } = await client.updatePost(1, {
+const { post3 } = await client.updatePost(1, {
   wip: false,
   message: 'Ship it!',
 })
