@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/suin/esa-api/compare/v3.0.1...v3.0.2) (2020-06-22)
+
+
+### Bug Fixes
+
+* 🐛 remove console.log ([5a2c072](https://github.com/suin/esa-api/commit/5a2c07251cd641066f86f126091e248cb4644a22))
+
 ## [3.0.1](https://github.com/suin/esa-api/compare/v3.0.0...v3.0.1) (2020-06-22)
 
 
