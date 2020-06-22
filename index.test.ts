@@ -1,5 +1,12 @@
 import MockAdapter from 'axios-mock-adapter'
-import { createClient, Client, PostsPayload, Post } from './index'
+import {
+  Client,
+  createClient,
+  Post,
+  PostsPayload,
+  UpdatePostParameters,
+  UpdatePostResult,
+} from './index'
 
 describe('esaApi', () => {
   let client: Client
@@ -33,6 +40,24 @@ describe('esaApi', () => {
     test('get a post by number', async () => {
       const { post } = await client.getPost(1)
       expect(post!.number).toBe(1)
+    })
+
+    describe('updatePost', () => {
+      test('update a post', async () => {
+        const { posts } = await client.getPosts({ q: 'tag:esa-api-test-data' })
+        if (posts.length !== 1) {
+          console.warn('the post for test not found')
+          return
+        }
+        const { number, revision_number } = posts[0]
+        const { post } = await client.updatePost(number, {
+          wip: true,
+          body_md:
+            '`@suin/esa-api`からのテストです。この投稿は消さないでください。',
+          message: 'updated by test code',
+        })
+        expect(post.revision_number).toBe(revision_number + 1)
+      })
     })
   })
 
@@ -209,6 +234,39 @@ describe('esaApi', () => {
         remaining: 73,
         reset: new Date(1589974200 * 1000),
       })
+    })
+  })
+
+  describe('updatePost', () => {
+    test('update a specific post', async () => {
+      const reqBody: UpdatePostParameters = { post: { wip: false } }
+      const resBody: Partial<UpdatePostResult['post']> = { wip: false }
+      mock.onPatch('/teams/acme/posts/1', reqBody).replyOnce(200, resBody, {})
+      const data = await client.updatePost(1, { wip: false })
+      expect(data.post.wip).toBe(false)
+    })
+
+    test('update a specific post with full params', async () => {
+      const post: Required<UpdatePostParameters['post']> = {
+        name: 'new name',
+        tags: ['tag1'],
+        wip: true,
+        body_md: 'body',
+        category: 'category name',
+        message: 'message',
+        created_by: 'esa_bot',
+        updated_by: 'esa_bot',
+        original_revision: {
+          number: 123,
+          body_md: 'old body',
+          user: 'esa_bot',
+        },
+      }
+      const reqBody: UpdatePostParameters = { post }
+      const resBody: Partial<UpdatePostResult['post']> = { wip: true }
+      mock.onPatch('/teams/acme/posts/1', reqBody).replyOnce(200, resBody, {})
+      const data = await client.updatePost(1, post)
+      expect(data.post.wip).toBe(true)
     })
   })
 

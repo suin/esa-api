@@ -84,6 +84,23 @@ class Client {
       return { team: this.team, ratelimit }
     }
   }
+
+  /**
+   * 指定された記事を編集します。
+   */
+  async updatePost(
+    postNumber: number,
+    post: UpdatePostParameters['post'],
+  ): Promise<UpdatePostResult> {
+    const data: UpdatePostParameters = { post }
+    const response = await this.axios.request<UpdatePostResult['post']>({
+      method: 'PATCH',
+      url: `/teams/${this.team}/posts/${postNumber}`,
+      data,
+    })
+    const { ratelimit } = response[esa]
+    return { post: response.data, team: this.team, ratelimit }
+  }
 }
 
 export type { Client }
@@ -152,6 +169,65 @@ export interface PostPayload {
    * 記事が存在しない場合`undefined`になる
    */
   post?: Post
+  ratelimit: Ratelimit
+  team: string
+}
+
+/**
+ * 記事編集のパラメータ
+ */
+export interface UpdatePostParameters {
+  post: {
+    name?: string
+    body_md?: string
+    tags?: string[]
+    category?: string
+    wip?: boolean
+    message?: string
+    /**
+     * チームメンバーのscreen_nameもしくは "esa_bot" を指定することで記事の 作成者 を上書きすることができます。
+     * このパラメータは team の owner だけ が使用することができます。
+     */
+    created_by?: string | 'esa_bot'
+    /**
+     * チームメンバーのscreen_nameもしくは "esa_bot" を指定することで記事の 更新者 を上書きすることができます。
+     * このパラメータは team の owner だけ が使用することができます。
+     */
+    updated_by?: string | 'esa_bot'
+    /**
+     * リクエストに正常な `post.body_md` パラメータと `post.original_revision.*` パラメータが存在する場合、記事更新時に3 way mergeが行われます。
+     * `original_revision`パラメータが存在しない場合は、変更は常に後勝ちになります。
+     * [ReleaseNotes/2014/12/23/記事保存時の自動マージ - docs.esa.io](https://docs.esa.io/posts/35)
+     */
+    original_revision?: {
+      /**
+       * 変更前の記事の本文です
+       */
+      body_md: string
+      /**
+       * 変更前の記事のrevision_numberを指定します
+       */
+      number: number
+      /**
+       * 変更前の記事の最終更新者のscreen_nameを指定します
+       */
+      user: string
+    }
+  }
+}
+
+/**
+ * 記事編集結果
+ *
+ * PATCH /v1/teams/:team_name/posts/:post_numberのレスポンス。
+ */
+export interface UpdatePostResult {
+  post: Post & {
+    /**
+     * 3 way mergeを行いコンフリクトが起きた場合にのみ `true` になります。
+     */
+    overlapped: boolean
+  }
   ratelimit: Ratelimit
   team: string
 }

@@ -7,6 +7,7 @@ esa.io API のクライアントライブラリ。
 - 現在、以下のエンドポイントにのみに対応しています。
   - GET /v1/teams/:team_name/posts (記事一覧の取得)
   - GET /v1/teams/:team_name/posts/:post_number (指定された記事の取得)
+  - PATCH /v1/teams/:team_name/posts/:post_number (指定された記事の編集)
 
 ## インストール
 
@@ -29,7 +30,12 @@ const client = createClient({
 // 記事一覧を取得する
 const { posts } = await client.getPosts()
 // 指定した記事を取得する
-const { post } = await client.getPost(1)
+const { post1 } = await client.getPost(1)
+// 指定した記事を編集する
+const { post2 } = await client.updatePost(1, {
+  wip: false,
+  message: 'Ship it!',
+})
 ```
 
 複雑なクエリの例:
