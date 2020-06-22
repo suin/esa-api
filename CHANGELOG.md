@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/suin/esa-api/compare/v3.0.0...v3.0.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* 🐛 sample code bugs in README.md ([fc07a08](https://github.com/suin/esa-api/commit/fc07a08b23d980872ed56dd3582fcdaff1fd0a8a))
+
 # [3.0.0](https://github.com/suin/esa-api/compare/v2.2.0...v3.0.0) (2020-06-22)
 
 
