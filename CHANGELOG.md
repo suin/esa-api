@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/suin/esa-api/compare/v2.1.0...v2.2.0) (2020-06-22)
+
+
+### Features
+
+* 🎸 support POST /v1/teams/:team_name/posts ([a70acfd](https://github.com/suin/esa-api/commit/a70acfdf191ca24742571d9958b634ea2c85564a))
+
 # [2.1.0](https://github.com/suin/esa-api/compare/v2.0.0...v2.1.0) (2020-06-22)
 
 
