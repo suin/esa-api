@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Client | @suin/esa-api - v2.1.0</title>
-	<meta name="description" content="Documentation for @suin/esa-api - v2.1.0">
+	<title>Client | @suin/esa-api - v2.2.0</title>
+	<meta name="description" content="Documentation for @suin/esa-api - v2.2.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@suin/esa-api - v2.1.0</a>
+					<a href="../index.html" class="title">@suin/esa-api - v2.2.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -92,6 +92,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.client.html#createpost" class="tsd-kind-icon">create<wbr>Post</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.client.html#getpost" class="tsd-kind-icon">get<wbr>Post</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.client.html#getposts" class="tsd-kind-icon">get<wbr>Posts</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.client.html#updatepost" class="tsd-kind-icon">update<wbr>Post</a></li>
@@ -108,7 +109,7 @@
 					<div class="tsd-signature tsd-kind-icon">axios<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AxiosInstance</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.1.0/index.ts#L20">index.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.2.0/index.ts#L20">index.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -118,7 +119,7 @@
 					<div class="tsd-signature tsd-kind-icon">team<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.1.0/index.ts#L21">index.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.2.0/index.ts#L21">index.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -128,13 +129,41 @@
 					<div class="tsd-signature tsd-kind-icon">posts<wbr>Per<wbr>Page<wbr>Max<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">100</span><span class="tsd-signature-symbol"> = 100</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.1.0/index.ts#L18">index.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.2.0/index.ts#L18">index.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="createpost" class="tsd-anchor"></a>
+					<h3>create<wbr>Post</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Post<span class="tsd-signature-symbol">(</span>post<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CreatePostParameters</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"post"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_index_.html#createpostresult" class="tsd-signature-type">CreatePostResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.2.0/index.ts#L91">index.ts:91</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>記事を新たに投稿します。</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>post: <span class="tsd-signature-type">CreatePostParameters</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"post"</span><span class="tsd-signature-symbol">]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_index_.html#createpostresult" class="tsd-signature-type">CreatePostResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getpost" class="tsd-anchor"></a>
 					<h3>get<wbr>Post</h3>
@@ -145,7 +174,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.1.0/index.ts#L66">index.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.2.0/index.ts#L66">index.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -182,7 +211,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.1.0/index.ts#L42">index.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.2.0/index.ts#L42">index.ts:42</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -230,7 +259,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.1.0/index.ts#L91">index.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/suin/esa-api/blob/v2.2.0/index.ts#L117">index.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -279,6 +308,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 								<a href="_index_.client.html#postsperpagemax" class="tsd-kind-icon">posts<wbr>Per<wbr>Page<wbr>Max</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_index_.client.html#createpost" class="tsd-kind-icon">create<wbr>Post</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_index_.client.html#getpost" class="tsd-kind-icon">get<wbr>Post</a>
@@ -332,11 +364,23 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/_index_.user.html" class="tsd-kind-icon">User</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/_index_.html#createpostparameters" class="tsd-kind-icon">Create<wbr>Post<wbr>Parameters</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/_index_.html#createpostresult" class="tsd-kind-icon">Create<wbr>Post<wbr>Result</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="../modules/_index_.html#createclient" class="tsd-kind-icon">create<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_index_.html#escapepostname" class="tsd-kind-icon">escape<wbr>Post<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
 						<a href="../modules/_index_.html#isaxioserror" class="tsd-kind-icon">is<wbr>Axios<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_index_.html#removeescapepostname" class="tsd-kind-icon">remove<wbr>Escape<wbr>Post<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="../modules/_index_.html#setratelimit" class="tsd-kind-icon">set<wbr>Ratelimit</a>
@@ -351,13 +395,14 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
