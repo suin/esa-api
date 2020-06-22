@@ -58,7 +58,6 @@ class Client {
     for (const post of response.data.posts) {
       post.name = unescapePostName(post.name)
     }
-    console.log(response.data)
     return { ...response.data, team: this.team, ratelimit }
   }
 
