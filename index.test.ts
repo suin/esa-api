@@ -76,11 +76,11 @@ describe('esaApi', () => {
 
   describe('enhead authorization', () => {
     test('token', async () => {
-      mock.onGet('/teams/acme/posts').replyOnce(({ headers }) => {
+      mock.onGet('/teams/acme/posts/1').replyOnce(({ headers }) => {
         expect(headers).toMatchObject({ Authorization: 'Bearer mock-token' })
-        return [200, {}, {}]
+        return [404]
       })
-      await client.getPosts()
+      await client.getPost(1)
     })
   })
 
@@ -95,7 +95,7 @@ describe('esaApi', () => {
           page: 2,
           per_page: 100,
         })
-        return [200, {}, {}]
+        return [200, { posts: [] }, {}]
       })
       await client.getPosts({
         q: 'text',
@@ -111,7 +111,7 @@ describe('esaApi', () => {
       mock.onGet('/teams/acme/posts').replyOnce<Partial<PostsPayload>>(
         200,
         {
-          posts: [{}, {}] as Post[],
+          posts: [{ name: '' }, { name: '' }] as Post[],
           next_page: 2,
         },
         {},
@@ -121,7 +121,7 @@ describe('esaApi', () => {
     })
 
     test('pagination', async () => {
-      const post1 = { number: 1 } as Post
+      const post1 = { number: 1, name: '' } as Post
       mock.onGet('/teams/acme/posts').replyOnce<Partial<PostsPayload>>(
         200,
         {
@@ -134,7 +134,7 @@ describe('esaApi', () => {
       const data1 = await client.getPosts({ per_page: 1 })
       expect(data1.posts[0]).toEqual(post1)
 
-      const post2 = { number: 2 } as Post
+      const post2 = { number: 2, name: '' } as Post
       mock.onGet('/teams/acme/posts').replyOnce<Partial<PostsPayload>>(
         200,
         {
@@ -170,13 +170,30 @@ describe('esaApi', () => {
         reset: new Date(1589974200 * 1000),
       })
     })
+
+    test('escape sharps and slashes', async () => {
+      mock.onGet('/teams/acme/posts').replyOnce<Partial<PostsPayload>>(
+        200,
+        {
+          posts: [
+            {
+              name:
+                'sharps are &#35;&#35;&#35; and slashes are &#47;&#47;&#47;',
+            },
+          ] as Post[],
+        },
+        {},
+      )
+      const data = await client.getPosts()
+      expect(data.posts[0].name).toBe('sharps are ### and slashes are ///')
+    })
   })
 
   describe('getPost', () => {
     test('get a specific post', async () => {
       mock
         .onGet('/teams/acme/posts/1')
-        .replyOnce<Partial<Post>>(200, { number: 1 }, {})
+        .replyOnce<Partial<Post>>(200, { number: 1, name: '' }, {})
       const data = await client.getPost(1)
       expect(data.post!.number).toBe(1)
     })
@@ -184,7 +201,7 @@ describe('esaApi', () => {
     test('get a specific post with comments', async () => {
       mock
         .onGet('/teams/acme/posts/1', { params: { include: 'comments' } })
-        .replyOnce<Partial<Post>>(200, { number: 1 }, {})
+        .replyOnce<Partial<Post>>(200, { number: 1, name: '' }, {})
       const data = await client.getPost(1, { include: ['comments'] })
       expect(data.post!.number).toBe(1)
     })
@@ -194,7 +211,7 @@ describe('esaApi', () => {
         .onGet('/teams/acme/posts/1', {
           params: { include: 'comments,stargazers' },
         })
-        .replyOnce<Partial<Post>>(200, { number: 1 }, {})
+        .replyOnce<Partial<Post>>(200, { number: 1, name: '' }, {})
       const data = await client.getPost(1, {
         include: ['comments', 'stargazers'],
       })
@@ -213,7 +230,7 @@ describe('esaApi', () => {
     test('ratelimit', async () => {
       mock.onGet('/teams/acme/posts/1').replyOnce<Partial<Post>>(
         200,
-        { number: 1 },
+        { number: 1, name: '' },
         {
           'x-ratelimit-limit': '75',
           'x-ratelimit-remaining': '73',
@@ -247,6 +264,18 @@ describe('esaApi', () => {
         remaining: 73,
         reset: new Date(1589974200 * 1000),
       })
+    })
+
+    test('escape sharps and slashes', async () => {
+      mock.onGet('/teams/acme/posts/1').replyOnce<Partial<Post>>(
+        200,
+        {
+          name: 'sharps are &#35;&#35;&#35; and slashes are &#47;&#47;&#47;',
+        },
+        {},
+      )
+      const data = await client.getPost(1)
+      expect(data.post!.name).toBe('sharps are ### and slashes are ///')
     })
   })
 
@@ -305,7 +334,10 @@ describe('esaApi', () => {
   describe('updatePost', () => {
     test('update a specific post', async () => {
       const reqBody: UpdatePostParameters = { post: { wip: false } }
-      const resBody: Partial<UpdatePostResult['post']> = { wip: false }
+      const resBody: Partial<UpdatePostResult['post']> = {
+        name: '',
+        wip: false,
+      }
       mock.onPatch('/teams/acme/posts/1', reqBody).replyOnce(200, resBody, {})
       const data = await client.updatePost(1, { wip: false })
       expect(data.post.wip).toBe(false)
@@ -328,10 +360,28 @@ describe('esaApi', () => {
         },
       }
       const reqBody: UpdatePostParameters = { post }
-      const resBody: Partial<UpdatePostResult['post']> = { wip: true }
+      const resBody: Partial<UpdatePostResult['post']> = { wip: true, name: '' }
       mock.onPatch('/teams/acme/posts/1', reqBody).replyOnce(200, resBody, {})
       const data = await client.updatePost(1, post)
       expect(data.post.wip).toBe(true)
+    })
+
+    test('slash in name is replaced with &#47;', async () => {
+      const reqBody: UpdatePostParameters = { post: { name: 'foo&#47;bar' } }
+      const resBody: Partial<UpdatePostResult['post']> = { name: 'foo&#47;bar' }
+      mock.onPatch('/teams/acme/posts/1', reqBody).replyOnce(200, resBody, {})
+      const data = await client.updatePost(1, { name: 'foo/bar' })
+      expect(data.post.name).toBe('foo/bar')
+    })
+
+    test('sharp in name is replaced with &#35;', async () => {
+      const reqBody: UpdatePostParameters = { post: { name: 'sharp is &#35;' } }
+      const resBody: Partial<UpdatePostResult['post']> = {
+        name: 'sharp is &#35;',
+      }
+      mock.onPatch('/teams/acme/posts/1', reqBody).replyOnce(200, resBody, {})
+      const data = await client.updatePost(1, { name: 'sharp is #' })
+      expect(data.post.name).toBe('sharp is #')
     })
   })
 

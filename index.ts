@@ -48,13 +48,17 @@ class Client {
     per_page,
   }: GetPostsParameters & PaginationParameters = {}): Promise<PostsPayload> {
     const include = includeArray ? includeArray.join(',') : undefined
-    const response = await this.axios.request({
+    const response = await this.axios.request<PostsPayload>({
       method: 'GET',
       url: `/teams/${this.team}/posts`,
       params: { q, include, sort, order, page, per_page },
     })
 
     const { ratelimit } = response[esa]
+    for (const post of response.data.posts) {
+      post.name = unescapePostName(post.name)
+    }
+    console.log(response.data)
     return { ...response.data, team: this.team, ratelimit }
   }
 
@@ -75,6 +79,7 @@ class Client {
         params: { include },
       })
       const { ratelimit } = response[esa]
+      response.data.name = unescapePostName(response.data.name)
       return { post: response.data, team: this.team, ratelimit }
     } catch (e) {
       if (!isAxiosError(e) || e.response?.status !== 404) {
@@ -94,18 +99,15 @@ class Client {
     const data: CreatePostParameters = {
       post: { ...post, name: escapePostName(post.name) },
     }
-    console.log(data)
     const response = await this.axios.request<CreatePostResult['post']>({
       method: 'POST',
       url: `/teams/${this.team}/posts`,
       data,
     })
     const { ratelimit } = response[esa]
+    response.data.name = unescapePostName(response.data.name)
     return {
-      post: {
-        ...response.data,
-        name: removeEscapePostName(response.data.name),
-      },
+      post: response.data,
       team: this.team,
       ratelimit,
     }
@@ -118,6 +120,9 @@ class Client {
     postNumber: number,
     post: UpdatePostParameters['post'],
   ): Promise<UpdatePostResult> {
+    if (post.name) {
+      post.name = escapePostName(post.name)
+    }
     const data: UpdatePostParameters = { post }
     const response = await this.axios.request<UpdatePostResult['post']>({
       method: 'PATCH',
@@ -125,6 +130,7 @@ class Client {
       data,
     })
     const { ratelimit } = response[esa]
+    response.data.name = unescapePostName(response.data.name)
     return { post: response.data, team: this.team, ratelimit }
   }
 }
@@ -463,10 +469,8 @@ declare module 'axios' {
 const isAxiosError = (error: unknown): error is AxiosError =>
   isObject<AxiosError>(error) && error.isAxiosError === true
 
-const escapePostName = (name: string): string => {
-  return name.replace('#', '&#35;').replace('/', '&#47;')
-}
+const escapePostName = (name: string): string =>
+  name.replace(/#/g, '&#35;').replace(/\//g, '&#47;')
 
-const removeEscapePostName = (escapedName: string): string => {
-  return escapedName.replace('&#35;', '#').replace('&#47;', '/')
-}
+const unescapePostName = (name: string): string =>
+  name.replace(/&#35;/g, '#').replace(/&#47;/g, '/')
