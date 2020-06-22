@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/suin/esa-api/compare/v2.2.0...v3.0.0) (2020-06-22)
+
+
+### Features
+
+* 🎸 escape sharps and slashes in post name to entity refs ([ced895d](https://github.com/suin/esa-api/commit/ced895d1253ac5ecb2116818ef83b34a82df3f20)), closes [#35](https://github.com/suin/esa-api/issues/35) [#47](https://github.com/suin/esa-api/issues/47) [#35](https://github.com/suin/esa-api/issues/35) [#47](https://github.com/suin/esa-api/issues/47)
+
+
+### BREAKING CHANGES
+
+* 🧨 扱っているデータによって互換性がなくなりました。記事タイトルに`#`や`/`を含む記事を扱っている場合、処理の結果が変わってくるはずです。
+
 # [2.2.0](https://github.com/suin/esa-api/compare/v2.1.0...v2.2.0) (2020-06-22)
 
 
