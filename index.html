@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@suin/esa-api - v3.0.0</title>
-	<meta name="description" content="Documentation for @suin/esa-api - v3.0.0">
+	<title>@suin/esa-api - v3.0.1</title>
+	<meta name="description" content="Documentation for @suin/esa-api - v3.0.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@suin/esa-api - v3.0.0</a>
+					<a href="index.html" class="title">@suin/esa-api - v3.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>@suin/esa-api - v3.0.0</h1>
+			<h1>@suin/esa-api - v3.0.1</h1>
 		</div>
 	</div>
 </header>
@@ -95,24 +95,32 @@ npm install @suin/esa-api</code></pre>
   team: <span class="hljs-string">'foo'</span>, <span class="hljs-comment">// チーム名</span>
   token: process.env.ESA_TOKEN, <span class="hljs-comment">// アクセストーン</span>
 })
-<span class="hljs-comment">// 記事一覧を取得する</span>
-<span class="hljs-keyword">const</span> { posts } = <span class="hljs-keyword">await</span> client.getPosts()
-<span class="hljs-comment">// 指定した記事を取得する</span>
-<span class="hljs-keyword">const</span> { post1 } = <span class="hljs-keyword">await</span> client.getPost(<span class="hljs-number">1</span>)
-<span class="hljs-comment">// 記事を新規投稿する</span>
-<span class="hljs-keyword">const</span> { post2 } = <span class="hljs-keyword">await</span> client.createPost({
-  name: <span class="hljs-string">'hi!'</span>,
-  body_md: <span class="hljs-string">'# Getting Started\n'</span>,
-  tags: [<span class="hljs-string">'api'</span>, <span class="hljs-string">'dev'</span>],
-  category: <span class="hljs-string">'dev/2015/05/10'</span>,
-  wip: <span class="hljs-literal">false</span>,
-  message: <span class="hljs-string">'Add Getting Started section'</span>,
-})
-<span class="hljs-comment">// 指定した記事を編集する</span>
-<span class="hljs-keyword">const</span> { post3 } = <span class="hljs-keyword">await</span> client.updatePost(<span class="hljs-number">1</span>, {
-  wip: <span class="hljs-literal">false</span>,
-  message: <span class="hljs-string">'Ship it!'</span>,
-})</code></pre>
+{
+  <span class="hljs-comment">// 記事一覧を取得する</span>
+  <span class="hljs-keyword">const</span> { posts } = <span class="hljs-keyword">await</span> client.getPosts()
+}
+{
+  <span class="hljs-comment">// 指定した記事を取得する</span>
+  <span class="hljs-keyword">const</span> { post } = <span class="hljs-keyword">await</span> client.getPost(<span class="hljs-number">1</span>)
+}
+{
+  <span class="hljs-comment">// 記事を新規投稿する</span>
+  <span class="hljs-keyword">const</span> { post } = <span class="hljs-keyword">await</span> client.createPost({
+    name: <span class="hljs-string">'hi!'</span>,
+    body_md: <span class="hljs-string">'# Getting Started\n'</span>,
+    tags: [<span class="hljs-string">'api'</span>, <span class="hljs-string">'dev'</span>],
+    category: <span class="hljs-string">'dev/2015/05/10'</span>,
+    wip: <span class="hljs-literal">false</span>,
+    message: <span class="hljs-string">'Add Getting Started section'</span>,
+  })
+}
+{
+  <span class="hljs-comment">// 指定した記事を編集する</span>
+  <span class="hljs-keyword">const</span> { post } = <span class="hljs-keyword">await</span> client.updatePost(<span class="hljs-number">1</span>, {
+    wip: <span class="hljs-literal">false</span>,
+    message: <span class="hljs-string">'Ship it!'</span>,
+  })
+}</code></pre>
 				<p>複雑なクエリの例:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { createClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'@suin/esa-api'</span>
 <span class="hljs-keyword">const</span> client = createClient({
