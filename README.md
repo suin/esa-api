@@ -5,6 +5,7 @@ esa.io API のクライアントライブラリ。
 ## 特徴
 
 - 現在、以下のエンドポイントにのみに対応しています。
+  - GET /v1/teams/:team_name/members (メンバー一覧の取得)
   - GET /v1/teams/:team_name/posts (記事一覧の取得)
   - GET /v1/teams/:team_name/posts/:post_number (指定された記事の取得)
   - POST /v1/teams/:team_name/posts (記事の新規投稿)

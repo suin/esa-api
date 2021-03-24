@@ -5,6 +5,7 @@ import axios, {
   AxiosResponse,
 } from 'axios'
 import { isObject } from '@suin/is-object'
+import { getMembers, GetMembersParameters, MembersPayload } from './members'
 
 export const createClient = ({
   team,
@@ -34,6 +35,13 @@ class Client {
     this.axios = axios.create({ baseURL: 'https://api.esa.io/v1' })
     this.axios.interceptors.request.use(enheadAuthorization(token))
     this.axios.interceptors.response.use(setRatelimit, setRatelimit)
+  }
+
+  /**
+   * メンバー一覧を取得する
+   */
+  getMembers(parameters: GetMembersParameters = {}): Promise<MembersPayload> {
+    return getMembers(this.axios, this.team, parameters)
   }
 
   /**
