@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PaginationParameters | @suin/esa-api - v3.1.0</title>
+	<title>GetMembersParameters | @suin/esa-api - v3.1.0</title>
 	<meta name="description" content="Documentation for @suin/esa-api - v3.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,27 +56,36 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_index_.html">&quot;index&quot;</a>
+					<a href="../modules/_members_.html">&quot;members&quot;</a>
 				</li>
 				<li>
-					<a href="_index_.paginationparameters.html">PaginationParameters</a>
+					<a href="_members_.getmembersparameters.html">GetMembersParameters</a>
 				</li>
 			</ul>
-			<h1>Interface PaginationParameters</h1>
+			<h1>Interface GetMembersParameters</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>GET /v1/teams/:team_name/membersに指定できるURIクエリ文字列</p>
+					</div>
+					<p>公式ドキュメント: <a href="https://docs.esa.io/posts/102#GET%20/v1/teams/:team_name/members">dev/esa/api/v1 #noexpand -
+					docs.esa.io</a></p>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PaginationParameters</span>
+						<a href="_index_.paginationparameters.html" class="tsd-signature-type">PaginationParameters</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="_members_.getmembersparameters.html" class="tsd-signature-type">GetMembersParameters</a>
+								<span class="target">GetMembersParameters</span>
 							</li>
 						</ul>
 					</li>
@@ -89,8 +98,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.paginationparameters.html#page" class="tsd-kind-icon">page</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.paginationparameters.html#per_page" class="tsd-kind-icon">per_<wbr>page</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_members_.getmembersparameters.html#order" class="tsd-kind-icon">order</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_members_.getmembersparameters.html#page" class="tsd-kind-icon">page</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_members_.getmembersparameters.html#per_page" class="tsd-kind-icon">per_<wbr>page</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_members_.getmembersparameters.html#sort" class="tsd-kind-icon">sort</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,24 +110,65 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="order" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> order</h3>
+					<div class="tsd-signature tsd-kind-icon">order<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"desc"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"asc"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v3.1.0/members.ts#L42">members.ts:42</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>並び順の方向</p>
+						</div>
+						<ul>
+							<li><code>desc</code> (default): 降順</li>
+							<li><code>asc</code>: 昇順</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="page" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> page</h3>
 					<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_index_.paginationparameters.html">PaginationParameters</a>.<a href="_index_.paginationparameters.html#page">page</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v3.1.0/index.ts#L452">index.ts:452</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="per_page" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> per_<wbr>page</h3>
 					<div class="tsd-signature tsd-kind-icon">per_<wbr>page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="_index_.paginationparameters.html">PaginationParameters</a>.<a href="_index_.paginationparameters.html#per_page">per_page</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v3.1.0/index.ts#L453">index.ts:453</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sort" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> sort</h3>
+					<div class="tsd-signature tsd-kind-icon">sort<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"posts_count"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"joined"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"last_accessed"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/suin/esa-api/blob/v3.1.0/members.ts#L34">members.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>メンバーの並び順</p>
+						</div>
+						<ul>
+							<li><code>posts_count</code> (default): チーム内での記事の作成数</li>
+							<li><code>joined</code>: チームへ参加日時</li>
+							<li><code>last_accessed</code>: 最終アクセス日時</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -126,99 +178,45 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_members_.html">&quot;members&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/_index_.html#getmembersparameters" class="tsd-kind-icon">Get<wbr>Members<wbr>Parameters</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/_index_.html#member" class="tsd-kind-icon">Member</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/_index_.html#memberspayload" class="tsd-kind-icon">Members<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/_index_.client.html" class="tsd-kind-icon">Client</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.comment.html" class="tsd-kind-icon">Comment</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.getpostparameters.html" class="tsd-kind-icon">Get<wbr>Post<wbr>Parameters</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.getpostsparameters.html" class="tsd-kind-icon">Get<wbr>Posts<wbr>Parameters</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.paginateddata.html" class="tsd-kind-icon">Paginated<wbr>Data</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.paginationparameters.html" class="tsd-kind-icon">Pagination<wbr>Parameters</a>
+						<a href="_members_.getmembersparameters.html" class="tsd-kind-icon">Get<wbr>Members<wbr>Parameters</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.paginationparameters.html#page" class="tsd-kind-icon">page</a>
+								<a href="_members_.getmembersparameters.html#order" class="tsd-kind-icon">order</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_members_.getmembersparameters.html#page" class="tsd-kind-icon">page</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_members_.getmembersparameters.html#per_page" class="tsd-kind-icon">per_<wbr>page</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.paginationparameters.html#per_page" class="tsd-kind-icon">per_<wbr>page</a>
+								<a href="_members_.getmembersparameters.html#sort" class="tsd-kind-icon">sort</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.post.html" class="tsd-kind-icon">Post</a>
+						<a href="_members_.member.html" class="tsd-kind-icon">Member</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.postpayload.html" class="tsd-kind-icon">Post<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.postspayload.html" class="tsd-kind-icon">Posts<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.ratelimit.html" class="tsd-kind-icon">Ratelimit</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.stargazer.html" class="tsd-kind-icon">Stargazer</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.updatepostparameters.html" class="tsd-kind-icon">Update<wbr>Post<wbr>Parameters</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.updatepostresult.html" class="tsd-kind-icon">Update<wbr>Post<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="_index_.user.html" class="tsd-kind-icon">User</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/_index_.html#createpostparameters" class="tsd-kind-icon">Create<wbr>Post<wbr>Parameters</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/_index_.html#createpostresult" class="tsd-kind-icon">Create<wbr>Post<wbr>Result</a>
+						<a href="_members_.memberspayload.html" class="tsd-kind-icon">Members<wbr>Payload</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/_index_.html#createclient" class="tsd-kind-icon">create<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/_index_.html#escapepostname" class="tsd-kind-icon">escape<wbr>Post<wbr>Name</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/_index_.html#isaxioserror" class="tsd-kind-icon">is<wbr>Axios<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../modules/_index_.html#setratelimit" class="tsd-kind-icon">set<wbr>Ratelimit</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/_index_.html#unescapepostname" class="tsd-kind-icon">unescape<wbr>Post<wbr>Name</a>
+						<a href="../modules/_members_.html#getmembers" class="tsd-kind-icon">get<wbr>Members</a>
 					</li>
 				</ul>
 			</nav>
