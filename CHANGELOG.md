@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/suin/esa-api/compare/v3.1.0...v3.2.0) (2021-03-24)
+
+
+### Features
+
+* 🎸 support myself property ([3cf862d](https://github.com/suin/esa-api/commit/3cf862d465989329f7b6c6ed743cb04e904a5d88))
+
 # [3.1.0](https://github.com/suin/esa-api/compare/v3.0.2...v3.1.0) (2021-03-24)
 
 
