@@ -1,4 +1,4 @@
-import { PaginatedData } from './index'
+import { PaginatedData, PaginationParameters } from './index'
 import { AxiosInstance } from 'axios'
 
 /**
@@ -7,12 +7,12 @@ import { AxiosInstance } from 'axios'
 export async function getMembers(
   axios: AxiosInstance,
   team: string,
-  { sort, order }: GetMembersParameters,
+  { sort, order, page, per_page }: GetMembersParameters,
 ): Promise<MembersPayload> {
   const response = await axios.request<MembersPayload>({
     method: 'GET',
     url: `/teams/${team}/members`,
-    params: { sort, order },
+    params: { sort, order, page, per_page },
   })
   return { ...response.data, team }
 }
@@ -23,7 +23,7 @@ export async function getMembers(
  * 公式ドキュメント: [dev/esa/api/v1 #noexpand -
  * docs.esa.io](https://docs.esa.io/posts/102#GET%20/v1/teams/:team_name/members)
  */
-export interface GetMembersParameters {
+export interface GetMembersParameters extends PaginationParameters {
   /**
    * メンバーの並び順
    *
