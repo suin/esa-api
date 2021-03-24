@@ -6,6 +6,7 @@ import axios, {
 } from 'axios'
 import { isObject } from '@suin/is-object'
 import { getMembers, GetMembersParameters, MembersPayload } from './members'
+import { User } from './user'
 
 export const createClient = ({
   team,
@@ -368,11 +369,7 @@ export interface Stargazer {
   user: User
 }
 
-export interface User {
-  name: string
-  screen_name: string
-  icon: string
-}
+export { User }
 
 /**
  * GET /v1/teams/:team_name/postsに指定できるURIクエリ文字列
