@@ -314,6 +314,8 @@ export interface PaginatedData {
   max_per_page: number
 }
 
+export { Member, GetMembersParameters, MembersPayload } from './members'
+
 export interface Post {
   number: number
   name: string
