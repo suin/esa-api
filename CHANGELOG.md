@@ -1,3 +1,12 @@
+# [3.1.0](https://github.com/suin/esa-api/compare/v3.0.2...v3.1.0) (2021-03-24)
+
+
+### Features
+
+* 🎸 export Member type ([b987dc5](https://github.com/suin/esa-api/commit/b987dc5c77508907ddb096692db4477bea6ae9a9))
+* 🎸 support GET /v1/teams/:team_name/members ([b69aa08](https://github.com/suin/esa-api/commit/b69aa08a72d0f56f7a59dcd07fe8301a7825fb15))
+* 🎸 support pagination in getMembers ([cf335be](https://github.com/suin/esa-api/commit/cf335be7ec6692436b353eb5510b4cd5314ae8dd))
+
 ## [3.0.2](https://github.com/suin/esa-api/compare/v3.0.1...v3.0.2) (2020-06-22)
 
 
