@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     - cron: '0 21 * * *' # at 6:00 AM (Asia/Tokyo)
 
@@ -18,10 +18,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
+      - uses: pnpm/action-setup@v1.2.1
+        with:
+          version: 5.18.5
       - name: Install dependencies
-        run: yarn --frozen-lockfile --ignore-optional
+        run: pnpm install --frozen-lockfile --no-optional
       - name: Compile
-        run: yarn build
+        run: pnpm build
 
   test:
     name: Test (Node ${{ matrix.node }})
@@ -30,9 +33,7 @@ jobs:
       matrix:
         node:
           - '10'
-          - '11'
           - '12'
-          - '13'
           - '14'
     steps:
       - name: Checkout
@@ -41,10 +42,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
+      - uses: pnpm/action-setup@v1.2.1
+        with:
+          version: 5.18.5
       - name: Install dependencies
-        run: yarn --frozen-lockfile --ignore-optional
+        run: pnpm install --frozen-lockfile --no-optional
       - name: Test
-        run: yarn jest
+        run: pnpm test
 
   release:
     name: Release
@@ -57,17 +61,20 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
+      - uses: pnpm/action-setup@v1.2.1
+        with:
+          version: 5.18.5
       - name: Install dependencies
-        run: yarn --frozen-lockfile --ignore-optional
+        run: pnpm install --frozen-lockfile --no-optional
       - name: Build
-        run: yarn build
+        run: pnpm build
       - name: Contents of package
-        run: yarn pack:preview
+        run: pnpm pack:preview
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn semantic-release
+        run: pnpm semantic-release
       - name: Check reference existence
         id: check_reference
         uses: andstor/file-existence-action@v1
