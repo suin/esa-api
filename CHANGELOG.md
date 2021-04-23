@@ -1,3 +1,17 @@
+# [4.0.0](https://github.com/suin/esa-api/compare/v3.2.0...v4.0.0) (2021-04-23)
+
+
+### Features
+
+* 🎸 すべてのエンドポイントに対応しました ([c10dc8c](https://github.com/suin/esa-api/commit/c10dc8c007eec39098bfdde50c894b8428b3a1e5))
+
+
+### BREAKING CHANGES
+
+* 🧨 Clientは下位互換性がありません
+
+[@suin/esa-openapi](https://github.com/suin/esa-openapi)を使い、クライアントライブラリを自動生成するようにしました。これにより、esa APIのすべてのエンドポイントに対応することとなりました。
+
 # [3.2.0](https://github.com/suin/esa-api/compare/v3.1.0...v3.2.0) (2021-03-24)
 
 
