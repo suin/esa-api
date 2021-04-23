@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@suin/esa-api - v3.2.0</title>
-	<meta name="description" content="Documentation for @suin/esa-api - v3.2.0">
+	<title>@suin/esa-api</title>
+	<meta name="description" content="Documentation for @suin/esa-api">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -22,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@suin/esa-api - v3.2.0</a>
+					<a href="index.html" class="title">@suin/esa-api</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,12 +50,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1>@suin/esa-api - v3.2.0</h1>
+			<h1>@suin/esa-api</h1>
 		</div>
 	</div>
 </header>
@@ -72,89 +66,104 @@
 					<h2>特徴</h2>
 				</a>
 				<ul>
-					<li>現在、以下のエンドポイントにのみに対応しています。<ul>
-							<li>GET /v1/teams/:team_name/members (メンバー一覧の取得)</li>
-							<li>GET /v1/teams/:team_name/posts (記事一覧の取得)</li>
-							<li>GET /v1/teams/:team_name/posts/:post_number (指定された記事の取得)</li>
-							<li>POST /v1/teams/:team_name/posts (記事の新規投稿)</li>
-							<li>PATCH /v1/teams/:team_name/posts/:post_number (指定された記事の編集)</li>
-						</ul>
-					</li>
+					<li>すべてのエンドポイントに対応しています。</li>
+					<li><a href="https://github.com/suin/esa-openapi">esa API の OpenAPI 仕様書</a>から生成したクライアントライブラリをベースに一部拡張を加えたライブラリです。</li>
 				</ul>
 				<a href="#インストール" id="インストール" style="color: inherit; text-decoration: none;">
 					<h2>インストール</h2>
 				</a>
-				<pre><code class="language-bash">yarn add @suin/esa-api
-<span class="hljs-comment"># or</span>
-npm install @suin/esa-api</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add @suin/esa-api</span>
+<span style="color: #008000"># or</span>
+<span style="color: #000000">npm install @suin/esa-api</span>
+</code></pre>
 				<a href="#使い方" id="使い方" style="color: inherit; text-decoration: none;">
 					<h2>使い方</h2>
 				</a>
 				<p>基本的な用法:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { createClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'@suin/esa-api'</span>
-<span class="hljs-keyword">const</span> client = createClient({
-  team: <span class="hljs-string">'foo'</span>, <span class="hljs-comment">// チーム名</span>
-  token: process.env.ESA_TOKEN, <span class="hljs-comment">// アクセストーン</span>
-})
-{
-  <span class="hljs-comment">// 記事一覧を取得する</span>
-  <span class="hljs-keyword">const</span> { posts } = <span class="hljs-keyword">await</span> client.getPosts()
-}
-{
-  <span class="hljs-comment">// 指定した記事を取得する</span>
-  <span class="hljs-keyword">const</span> { post } = <span class="hljs-keyword">await</span> client.getPost(<span class="hljs-number">1</span>)
-}
-{
-  <span class="hljs-comment">// 記事を新規投稿する</span>
-  <span class="hljs-keyword">const</span> { post } = <span class="hljs-keyword">await</span> client.createPost({
-    name: <span class="hljs-string">'hi!'</span>,
-    body_md: <span class="hljs-string">'# Getting Started\n'</span>,
-    tags: [<span class="hljs-string">'api'</span>, <span class="hljs-string">'dev'</span>],
-    category: <span class="hljs-string">'dev/2015/05/10'</span>,
-    wip: <span class="hljs-literal">false</span>,
-    message: <span class="hljs-string">'Add Getting Started section'</span>,
-  })
-}
-{
-  <span class="hljs-comment">// 指定した記事を編集する</span>
-  <span class="hljs-keyword">const</span> { post } = <span class="hljs-keyword">await</span> client.updatePost(<span class="hljs-number">1</span>, {
-    wip: <span class="hljs-literal">false</span>,
-    message: <span class="hljs-string">'Ship it!'</span>,
-  })
-}</code></pre>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">createClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@suin/esa-api&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">teamName</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;your_team_name&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #795E26">createClient</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">token:</span><span style="color: #000000"> </span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">.</span><span style="color: #0070C1">ESA_TOKEN</span><span style="color: #000000">, </span><span style="color: #008000">// アクセストーン</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #008000">// 記事一覧を取得する</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">data</span><span style="color: #000000">: { </span><span style="color: #0070C1">posts</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  } = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getPosts</span><span style="color: #000000">({ </span><span style="color: #001080">teamName</span><span style="color: #000000"> });</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #008000">// 指定した記事を取得する</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #001080">data</span><span style="color: #000000">: </span><span style="color: #0070C1">post</span><span style="color: #000000"> } = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getPost</span><span style="color: #000000">({ </span><span style="color: #001080">teamName</span><span style="color: #000000">, </span><span style="color: #001080">postNumber:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> });</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #008000">// 記事を新規投稿する</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #001080">data</span><span style="color: #000000">: </span><span style="color: #0070C1">createdPost</span><span style="color: #000000"> } = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">createPost</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">teamName</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">post:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;hi!&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">body_md:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;# Getting Started</span><span style="color: #EE0000">\n</span><span style="color: #A31515">&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">tags:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;api&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;dev&quot;</span><span style="color: #000000">],</span>
+<span style="color: #000000">      </span><span style="color: #001080">category:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dev/2015/05/10&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">wip:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">message:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Add Getting Started section&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  });</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #008000">// 指定した記事を編集する</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #001080">data</span><span style="color: #000000">: </span><span style="color: #0070C1">updatedPost</span><span style="color: #000000"> } = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">updatePost</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">teamName</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">postNumber:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">updatePostBody:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">post:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">wip:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">message:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Ship it!&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  });</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<p>複雑なクエリの例:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { createClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'@suin/esa-api'</span>
-<span class="hljs-keyword">const</span> client = createClient({
-  team: <span class="hljs-string">'foo'</span>,
-  token: process.env.ESA_TOKEN,
-})
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">createClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@suin/esa-api&quot;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// 細かい条件を設定して記事一覧を取得する</span>
-<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.getPosts({
-  q: <span class="hljs-string">'wip:false'</span>,
-  include: [<span class="hljs-string">'comments'</span>, <span class="hljs-string">'comments.stargazers'</span>, <span class="hljs-string">'stargazers'</span>],
-  sort: <span class="hljs-string">'updated'</span>,
-  order: <span class="hljs-string">'desc'</span>,
-  per_page: <span class="hljs-number">100</span>,
-  page: <span class="hljs-number">1</span>,
-})
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">teamName</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;your_team_name&quot;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// 結果からは様々な付随情報が得られます:</span>
-<span class="hljs-comment">// 1. 記事一覧</span>
-<span class="hljs-keyword">const</span> { posts } = result
-<span class="hljs-comment">// 2. チーム名</span>
-<span class="hljs-keyword">const</span> { team } = result
-<span class="hljs-comment">// 3. 利用制限</span>
-<span class="hljs-keyword">const</span> { limit, remaining, reset } = result.ratelimit
-<span class="hljs-comment">// 4. ページネーション</span>
-<span class="hljs-keyword">const</span> {
-  prev_page,
-  next_page,
-  page,
-  per_page,
-  max_per_page,
-  total_count,
-} = result</code></pre>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #795E26">createClient</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">token:</span><span style="color: #000000"> </span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">env</span><span style="color: #000000">.</span><span style="color: #0070C1">ESA_TOKEN</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// 細かい条件を設定して記事一覧を取得する</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">response</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getPosts</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">teamName</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">q:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;wip:false&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">include:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;comments&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;comments.stargazers&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;stargazers&quot;</span><span style="color: #000000">],</span>
+<span style="color: #000000">  </span><span style="color: #001080">sort:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;updated&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">order:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;desc&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">per_page:</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">page:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// 結果からは様々な付随情報が得られます:</span>
+<span style="color: #008000">// 1. 記事一覧</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">posts</span><span style="color: #000000"> } = </span><span style="color: #001080">response</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">;</span>
+<span style="color: #008000">// 2. 利用制限</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">limit</span><span style="color: #000000">, </span><span style="color: #0070C1">remaining</span><span style="color: #000000">, </span><span style="color: #0070C1">reset</span><span style="color: #000000"> } = </span><span style="color: #001080">response</span><span style="color: #000000">.</span><span style="color: #001080">ratelimit</span><span style="color: #000000">;</span>
+<span style="color: #008000">// 3. ページネーション</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">prev_page</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">next_page</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">page</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">per_page</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">max_per_page</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0070C1">total_count</span><span style="color: #000000">,</span>
+<span style="color: #000000">} = </span><span style="color: #001080">response</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">;</span>
+</code></pre>
 				<a href="#api-リファレンス" id="api-リファレンス" style="color: inherit; text-decoration: none;">
 					<h2>API リファレンス</h2>
 				</a>
@@ -164,22 +173,475 @@ npm install @suin/esa-api</code></pre>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_index_.html">&quot;index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_members_.html">&quot;members&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_user_.html">&quot;user&quot;</a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/memberroleenum.html" class="tsd-kind-icon">Member<wbr>Role<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/postkindenum.html" class="tsd-kind-icon">Post<wbr>Kind<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/teamprivacyenum.html" class="tsd-kind-icon">Team<wbr>Privacy<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/categoryapi.html" class="tsd-kind-icon">Category<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/client.html" class="tsd-kind-icon">Client</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/commentapi.html" class="tsd-kind-icon">Comment<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/configuration.html" class="tsd-kind-icon">Configuration</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/emojiapi.html" class="tsd-kind-icon">Emoji<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/esaapi.html" class="tsd-kind-icon">Esa<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/invitationapi.html" class="tsd-kind-icon">Invitation<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/memberapi.html" class="tsd-kind-icon">Member<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/postapi.html" class="tsd-kind-icon">Post<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/starapi.html" class="tsd-kind-icon">Star<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/teamapi.html" class="tsd-kind-icon">Team<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/userapi.html" class="tsd-kind-icon">User<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/watchapi.html" class="tsd-kind-icon">Watch<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/authenticateduser.html" class="tsd-kind-icon">Authenticated<wbr>User</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/batchmoveoptions.html" class="tsd-kind-icon">Batch<wbr>Move<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/batchmoveresult.html" class="tsd-kind-icon">Batch<wbr>Move<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/categoryapibatchmovecategoryrequest.html" class="tsd-kind-icon">Category<wbr>Api<wbr>Batch<wbr>Move<wbr>Category<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/comment.html" class="tsd-kind-icon">Comment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentapicreatecommentrequest.html" class="tsd-kind-icon">Comment<wbr>Api<wbr>Create<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentapideletecommentrequest.html" class="tsd-kind-icon">Comment<wbr>Api<wbr>Delete<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentapigetcommentrequest.html" class="tsd-kind-icon">Comment<wbr>Api<wbr>Get<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentapigetcommentsrequest.html" class="tsd-kind-icon">Comment<wbr>Api<wbr>Get<wbr>Comments<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentapigetpostcommentsrequest.html" class="tsd-kind-icon">Comment<wbr>Api<wbr>Get<wbr>Post<wbr>Comments<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/commentapiupdatecommentrequest.html" class="tsd-kind-icon">Comment<wbr>Api<wbr>Update<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/configurationparameters.html" class="tsd-kind-icon">Configuration<wbr>Parameters</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/createcommentbody.html" class="tsd-kind-icon">Create<wbr>Comment<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/createemojibody.html" class="tsd-kind-icon">Create<wbr>Emoji<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/createpostbody.html" class="tsd-kind-icon">Create<wbr>Post<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/createdemoji.html" class="tsd-kind-icon">Created<wbr>Emoji</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/editcomment.html" class="tsd-kind-icon">Edit<wbr>Comment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/editpost.html" class="tsd-kind-icon">Edit<wbr>Post</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/emailstoinvite.html" class="tsd-kind-icon">Emails<wbr>ToInvite</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/emoji.html" class="tsd-kind-icon">Emoji</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/emojiapicreateemojirequest.html" class="tsd-kind-icon">Emoji<wbr>Api<wbr>Create<wbr>Emoji<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/emojiapideleteemojirequest.html" class="tsd-kind-icon">Emoji<wbr>Api<wbr>Delete<wbr>Emoji<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/emojiapigetemojisrequest.html" class="tsd-kind-icon">Emoji<wbr>Api<wbr>Get<wbr>Emojis<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/emojilist.html" class="tsd-kind-icon">Emoji<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapibatchmovecategoryrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Batch<wbr>Move<wbr>Category<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapicreatecommentrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Create<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapicreateemojirequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Create<wbr>Emoji<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapicreatepostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Create<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapideletecommentrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Delete<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapideleteemojirequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Delete<wbr>Emoji<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapideletememberrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Delete<wbr>Member<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapideletepostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Delete<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapidisinviterequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Disinvite<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetauthenticateduserrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Authenticated<wbr>User<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetcommentrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetcommentstargazersrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Comment<wbr>Stargazers<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetcommentsrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Comments<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetemojisrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Emojis<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetinvitationsrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Invitations<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetmembersrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Members<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetpostcommentsrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Post<wbr>Comments<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetpostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetpoststargazersrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Post<wbr>Stargazers<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetpostsrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Posts<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetteamrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Team<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetteamstatsrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Team<wbr>Stats<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetteamsrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Teams<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapigetwatchersrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Get<wbr>Watchers<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapiinviterequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Invite<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapistarcommentrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Star<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapistarpostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Star<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapiunstarcommentrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Unstar<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapiunstarpostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Unstar<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapiunwachpostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Unwach<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapiupdatecommentrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Update<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapiupdatepostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Update<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/esaapiwatchpostrequest.html" class="tsd-kind-icon">Esa<wbr>Api<wbr>Watch<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invitation.html" class="tsd-kind-icon">Invitation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invitationapidisinviterequest.html" class="tsd-kind-icon">Invitation<wbr>Api<wbr>Disinvite<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invitationapigetinvitationsrequest.html" class="tsd-kind-icon">Invitation<wbr>Api<wbr>Get<wbr>Invitations<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invitationapiinviterequest.html" class="tsd-kind-icon">Invitation<wbr>Api<wbr>Invite<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invitationlist.html" class="tsd-kind-icon">Invitation<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invitebody.html" class="tsd-kind-icon">Invite<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/member.html" class="tsd-kind-icon">Member</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/memberapideletememberrequest.html" class="tsd-kind-icon">Member<wbr>Api<wbr>Delete<wbr>Member<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/memberapigetmembersrequest.html" class="tsd-kind-icon">Member<wbr>Api<wbr>Get<wbr>Members<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/newcomment.html" class="tsd-kind-icon">New<wbr>Comment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/newemoji.html" class="tsd-kind-icon">New<wbr>Emoji</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/newpost.html" class="tsd-kind-icon">New<wbr>Post</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/newstar.html" class="tsd-kind-icon">New<wbr>Star</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/originalrevision.html" class="tsd-kind-icon">Original<wbr>Revision</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paginatedcomments.html" class="tsd-kind-icon">Paginated<wbr>Comments</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paginatedmembers.html" class="tsd-kind-icon">Paginated<wbr>Members</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paginatedposts.html" class="tsd-kind-icon">Paginated<wbr>Posts</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paginatedstargazers.html" class="tsd-kind-icon">Paginated<wbr>Stargazers</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paginatedteams.html" class="tsd-kind-icon">Paginated<wbr>Teams</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/paginatedwatchers.html" class="tsd-kind-icon">Paginated<wbr>Watchers</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/post.html" class="tsd-kind-icon">Post</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/postapicreatepostrequest.html" class="tsd-kind-icon">Post<wbr>Api<wbr>Create<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/postapideletepostrequest.html" class="tsd-kind-icon">Post<wbr>Api<wbr>Delete<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/postapigetpostrequest.html" class="tsd-kind-icon">Post<wbr>Api<wbr>Get<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/postapigetpostsrequest.html" class="tsd-kind-icon">Post<wbr>Api<wbr>Get<wbr>Posts<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/postapiupdatepostrequest.html" class="tsd-kind-icon">Post<wbr>Api<wbr>Update<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/sharingurls.html" class="tsd-kind-icon">Sharing<wbr>Urls</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/starapigetcommentstargazersrequest.html" class="tsd-kind-icon">Star<wbr>Api<wbr>Get<wbr>Comment<wbr>Stargazers<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/starapigetpoststargazersrequest.html" class="tsd-kind-icon">Star<wbr>Api<wbr>Get<wbr>Post<wbr>Stargazers<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/starapistarcommentrequest.html" class="tsd-kind-icon">Star<wbr>Api<wbr>Star<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/starapistarpostrequest.html" class="tsd-kind-icon">Star<wbr>Api<wbr>Star<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/starapiunstarcommentrequest.html" class="tsd-kind-icon">Star<wbr>Api<wbr>Unstar<wbr>Comment<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/starapiunstarpostrequest.html" class="tsd-kind-icon">Star<wbr>Api<wbr>Unstar<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stargazer.html" class="tsd-kind-icon">Stargazer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/team.html" class="tsd-kind-icon">Team</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/teamapigetteamrequest.html" class="tsd-kind-icon">Team<wbr>Api<wbr>Get<wbr>Team<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/teamapigetteamstatsrequest.html" class="tsd-kind-icon">Team<wbr>Api<wbr>Get<wbr>Team<wbr>Stats<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/teamapigetteamsrequest.html" class="tsd-kind-icon">Team<wbr>Api<wbr>Get<wbr>Teams<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/teamstats.html" class="tsd-kind-icon">Team<wbr>Stats</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/updatecommentbody.html" class="tsd-kind-icon">Update<wbr>Comment<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/updatepostbody.html" class="tsd-kind-icon">Update<wbr>Post<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/user.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/userapigetauthenticateduserrequest.html" class="tsd-kind-icon">User<wbr>Api<wbr>Get<wbr>Authenticated<wbr>User<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/watchapigetwatchersrequest.html" class="tsd-kind-icon">Watch<wbr>Api<wbr>Get<wbr>Watchers<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/watchapiunwachpostrequest.html" class="tsd-kind-icon">Watch<wbr>Api<wbr>Unwach<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/watchapiwatchpostrequest.html" class="tsd-kind-icon">Watch<wbr>Api<wbr>Watch<wbr>Post<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/watcher.html" class="tsd-kind-icon">Watcher</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#categoryapiaxiosparamcreator" class="tsd-kind-icon">Category<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#categoryapifactory" class="tsd-kind-icon">Category<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#categoryapifp" class="tsd-kind-icon">Category<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#commentapiaxiosparamcreator" class="tsd-kind-icon">Comment<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#commentapifactory" class="tsd-kind-icon">Comment<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#commentapifp" class="tsd-kind-icon">Comment<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#emojiapiaxiosparamcreator" class="tsd-kind-icon">Emoji<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#emojiapifactory" class="tsd-kind-icon">Emoji<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#emojiapifp" class="tsd-kind-icon">Emoji<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#esaapiaxiosparamcreator" class="tsd-kind-icon">Esa<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#esaapifactory" class="tsd-kind-icon">Esa<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#esaapifp" class="tsd-kind-icon">Esa<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#invitationapiaxiosparamcreator" class="tsd-kind-icon">Invitation<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#invitationapifactory" class="tsd-kind-icon">Invitation<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#invitationapifp" class="tsd-kind-icon">Invitation<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#memberapiaxiosparamcreator" class="tsd-kind-icon">Member<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#memberapifactory" class="tsd-kind-icon">Member<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#memberapifp" class="tsd-kind-icon">Member<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#postapiaxiosparamcreator" class="tsd-kind-icon">Post<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#postapifactory" class="tsd-kind-icon">Post<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#postapifp" class="tsd-kind-icon">Post<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#starapiaxiosparamcreator" class="tsd-kind-icon">Star<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#starapifactory" class="tsd-kind-icon">Star<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#starapifp" class="tsd-kind-icon">Star<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#teamapiaxiosparamcreator" class="tsd-kind-icon">Team<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#teamapifactory" class="tsd-kind-icon">Team<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#teamapifp" class="tsd-kind-icon">Team<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#userapiaxiosparamcreator" class="tsd-kind-icon">User<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#userapifactory" class="tsd-kind-icon">User<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#userapifp" class="tsd-kind-icon">User<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#watchapiaxiosparamcreator" class="tsd-kind-icon">Watch<wbr>Api<wbr>Axios<wbr>Param<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#watchapifactory" class="tsd-kind-icon">Watch<wbr>Api<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#watchapifp" class="tsd-kind-icon">Watch<wbr>Api<wbr>Fp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#createclient" class="tsd-kind-icon">create<wbr>Client</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -190,15 +652,16 @@ npm install @suin/esa-api</code></pre>
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 		</div>
 	</div>
@@ -208,6 +671,5 @@ npm install @suin/esa-api</code></pre>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
