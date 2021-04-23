@@ -33,7 +33,7 @@
     // "alwaysStrict": true,
 
     /* Additional Checks */
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -49,6 +49,7 @@
     "esModuleInterop": true,
     // "preserveSymlinks": true,
     // "allowUmdGlobalAccess": true,
+    "resolveJsonModule": true,
 
     /* Source Map Options */
     // "sourceRoot": "",

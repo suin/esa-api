@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 21 * * *' # at 6:00 AM (Asia/Tokyo)
+    - cron: "0 21 * * *" # at 6:00 AM (Asia/Tokyo)
 
 jobs:
   compile:
@@ -32,9 +32,9 @@ jobs:
     strategy:
       matrix:
         node:
-          - '10'
-          - '12'
-          - '14'
+          - "10"
+          - "12"
+          - "14"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -47,6 +47,8 @@ jobs:
           version: 5.18.5
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --no-optional
+      - name: Generate client
+        run: pnpm generate:client
       - name: Test
         run: pnpm test
 
@@ -79,7 +81,7 @@ jobs:
         id: check_reference
         uses: andstor/file-existence-action@v1
         with:
-          files: 'reference'
+          files: "reference"
       - name: Publish API reference
         uses: peaceiris/actions-gh-pages@v3
         if: steps.check_reference.outputs.files_exists == 'true'

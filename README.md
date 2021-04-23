@@ -4,12 +4,7 @@ esa.io API のクライアントライブラリ。
 
 ## 特徴
 
-- 現在、以下のエンドポイントにのみに対応しています。
-  - GET /v1/teams/:team_name/members (メンバー一覧の取得)
-  - GET /v1/teams/:team_name/posts (記事一覧の取得)
-  - GET /v1/teams/:team_name/posts/:post_number (指定された記事の取得)
-  - POST /v1/teams/:team_name/posts (記事の新規投稿)
-  - PATCH /v1/teams/:team_name/posts/:post_number (指定された記事の編集)
+- すべてのエンドポイントに対応しています。
 
 ## インストール
 
@@ -24,66 +19,84 @@ npm install @suin/esa-api
 基本的な用法:
 
 ```typescript
-import { createClient } from '@suin/esa-api'
+import { createClient } from "@suin/esa-api";
+
+const teamName = "your_team_name";
+
 const client = createClient({
-  team: 'foo', // チーム名
   token: process.env.ESA_TOKEN, // アクセストーン
-})
+});
+
 {
   // 記事一覧を取得する
-  const { posts } = await client.getPosts()
+  const {
+    data: { posts },
+  } = await client.getPosts({ teamName });
 }
+
 {
   // 指定した記事を取得する
-  const { post } = await client.getPost(1)
+  const { data: post } = await client.getPost({ teamName, postNumber: 1 });
 }
+
 {
   // 記事を新規投稿する
-  const { post } = await client.createPost({
-    name: 'hi!',
-    body_md: '# Getting Started\n',
-    tags: ['api', 'dev'],
-    category: 'dev/2015/05/10',
-    wip: false,
-    message: 'Add Getting Started section',
-  })
+  const { data: createdPost } = await client.createPost({
+    teamName,
+    post: {
+      name: "hi!",
+      body_md: "# Getting Started\n",
+      tags: ["api", "dev"],
+      category: "dev/2015/05/10",
+      wip: false,
+      message: "Add Getting Started section",
+    },
+  });
 }
+
 {
   // 指定した記事を編集する
-  const { post } = await client.updatePost(1, {
-    wip: false,
-    message: 'Ship it!',
-  })
+  const { data: updatedPost } = await client.updatePost({
+    teamName,
+    postNumber: 1,
+    updatePostBody: {
+      post: {
+        wip: false,
+        message: "Ship it!",
+      },
+    },
+  });
 }
 ```
 
 複雑なクエリの例:
 
 ```typescript
-import { createClient } from '@suin/esa-api'
+import { createClient } from "@suin/esa-api";
+
+const teamName = "your_team_name";
+
 const client = createClient({
-  team: 'foo',
   token: process.env.ESA_TOKEN,
-})
+});
 
 // 細かい条件を設定して記事一覧を取得する
-const result = await client.getPosts({
-  q: 'wip:false',
-  include: ['comments', 'comments.stargazers', 'stargazers'],
-  sort: 'updated',
-  order: 'desc',
+const response = await client.getPosts({
+  teamName,
+  q: "wip:false",
+  include: ["comments", "comments.stargazers", "stargazers"],
+  sort: "updated",
+  order: "desc",
   per_page: 100,
   page: 1,
-})
+});
 
 // 結果からは様々な付随情報が得られます:
 // 1. 記事一覧
-const { posts } = result
-// 2. チーム名
-const { team } = result
-// 3. 利用制限
-const { limit, remaining, reset } = result.ratelimit
-// 4. ページネーション
+const { posts } = response.data;
+// 2. 利用制限
+const { limit, remaining, reset } = response.ratelimit;
+// 3. ページネーション
 const {
   prev_page,
   next_page,
@@ -91,7 +104,7 @@ const {
   per_page,
   max_per_page,
   total_count,
-} = result
+} = response.data;
 ```
 
 ## API リファレンス
