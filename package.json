@@ -24,7 +24,7 @@
     "!/__tests__"
   ],
   "scripts": {
-    "build": "pnpm generate:client && tsc",
+    "build": "yarn generate:client && tsc",
     "clean": "git clean -Xdf -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**' -e '!/.husky/**'",
     "clean:dry": "git clean -Xdfn -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**' -e '!/.husky/**'",
     "format": "yarn prettier --write",
