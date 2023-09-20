@@ -19,7 +19,7 @@ test("pagination", async () => {
         posts: [post1],
         next_page: 2,
       },
-      {}
+      {},
     );
 
   const { data: data1 } = await client.getPosts({
@@ -37,7 +37,7 @@ test("pagination", async () => {
         posts: [post2],
         next_page: 3,
       },
-      {}
+      {},
     );
 
   const { data: data2 } = await client.getPosts({

@@ -2,5 +2,6 @@
 *.js
 *.d.ts
 *.map
-!/types/**/*.d.ts
+!/ts/types/**/*.d.ts
 /reference
+/js

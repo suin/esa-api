@@ -12,7 +12,7 @@ beforeEach(async () => {
 test("request parameters", async () => {
   mock
     .onGet(
-      "https://api.esa.io/v1/teams/acme/posts?q=text&include=comments%2Cstargazers&sort=stars&order=desc&page=2&per_page=100"
+      "https://api.esa.io/v1/teams/acme/posts?q=text&include=comments%2Cstargazers&sort=stars&order=desc&page=2&per_page=100",
     )
     .replyOnce(() => {
       return [200, { posts: [] }, {}];
@@ -36,7 +36,7 @@ test("get 2 posts", async () => {
       {
         posts: [{ name: "" }, { name: "" }] as Post[],
       },
-      {}
+      {},
     );
   const { data } = await client.getPosts({
     teamName: "acme",
@@ -57,7 +57,7 @@ test("記事のnameのシャープとスラッシュはデコードされるこ�
           } as Post,
         ],
       },
-      {}
+      {},
     );
   const { data } = await client.getPosts({ teamName: "acme", page: 1 });
   expect(data.posts[0].name).toBe("sharps are ### and slashes are ///");

@@ -22,7 +22,7 @@ test("ratelimit object should be in AxiosResponse", async () => {
         "x-ratelimit-limit": "75",
         "x-ratelimit-remaining": "73",
         "x-ratelimit-reset": "1589974200",
-      }
+      },
     );
   const { ratelimit } = await client.getPosts({ teamName: "acme" });
   expect(ratelimit).toMatchInlineSnapshot(`

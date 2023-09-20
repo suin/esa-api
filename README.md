@@ -98,14 +98,8 @@ const { posts } = response.data;
 // 2. 利用制限
 const { limit, remaining, reset } = response.ratelimit;
 // 3. ページネーション
-const {
-  prev_page,
-  next_page,
-  page,
-  per_page,
-  max_per_page,
-  total_count,
-} = response.data;
+const { prev_page, next_page, page, per_page, max_per_page, total_count } =
+  response.data;
 ```
 
 ## API リファレンス

@@ -18,8 +18,8 @@ test("token", async () => {
     });
 
   await expect(
-    client.getPost({ teamName: "acme", postNumber: 1 })
+    client.getPost({ teamName: "acme", postNumber: 1 }),
   ).rejects.toThrowErrorMatchingInlineSnapshot(
-    `"Request failed with status code 404"`
+    `"Request failed with status code 404"`,
   );
 });

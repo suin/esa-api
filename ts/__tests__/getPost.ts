@@ -17,7 +17,7 @@ test("記事のnameのシャープとスラッシュはデコードされるこ�
       {
         name: "sharps are &#35;&#35;&#35; and slashes are &#47;&#47;&#47;",
       },
-      {}
+      {},
     );
   const { data } = await client.getPost({ teamName: "acme", postNumber: 1 });
   expect(data.name).toBe("sharps are ### and slashes are ///");

@@ -12,7 +12,7 @@
     "declarationMap": true,
     "sourceMap": true,
     // "outFile": "./",
-    // "outDir": "./",
+    "outDir": "./js",
     // "rootDir": "./",
     // "composite": true,
     // "tsBuildInfoFile": "./",
@@ -66,5 +66,6 @@
     /* Advanced Options */
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": ["ts/**/*"]
 }

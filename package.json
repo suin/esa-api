@@ -15,13 +15,13 @@
   },
   "license": "MIT",
   "author": "suin <suinyeze@gmail.com>",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "js/index.js",
+  "types": "js/index.d.ts",
   "files": [
     "**/*.{js,ts,map}",
     "!*.{test,spec}.*",
-    "!/types/this.d.ts",
-    "!/__tests__"
+    "!/ts/types/this.d.ts",
+    "!/{js,ts}/__tests__/**/*"
   ],
   "scripts": {
     "build": "yarn generate:client && tsc",
@@ -29,11 +29,11 @@
     "clean:dry": "git clean -Xdfn -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**' -e '!/.husky/**'",
     "format": "yarn prettier --write",
     "format:check": "yarn prettier --check",
-    "generate:client": "rm -rf client && openapi-generator-cli generate -g typescript-axios -i ./node_modules/@suin/esa-openapi/esa-api.json -o client --additional-properties=supportsES6=true,typescriptThreePlus=true,useSingleRequestParameter=true,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=models && prettier client -w",
+    "generate:client": "rm -rf ts/client && openapi-generator-cli generate -g typescript-axios -i ./node_modules/@suin/esa-openapi/esa-api.json -o ts/client --additional-properties=supportsES6=true,typescriptThreePlus=true,useSingleRequestParameter=true,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=models && prettier ts/client -w",
     "pack:preview": "PACKAGE=$(npm pack --ignore-scripts 2> /dev/null) sh -c 'set -eu && tar tf $PACKAGE | sort && rm $PACKAGE'",
     "prepare": "husky install",
     "prettier": "prettier '**/*.{ts,tsx,json,json5,css,scss,graphql,gql,md,mdx,html,vue,yaml}'",
-    "reference": "typedoc --gitRevision \"`git describe --tags --abbrev=0 2>/dev/null || echo main`\" --out reference index.ts",
+    "reference": "typedoc --gitRevision \"`git describe --tags --abbrev=0 2>/dev/null || echo main`\" --out reference ts/index.ts",
     "reset": "git clean -Xdf -e '!/.idea/**'",
     "reset:dry": "git clean -Xdfn -e '!/.idea/**'",
     "semantic-release": "semantic-release",

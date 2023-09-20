@@ -31,7 +31,7 @@ class Client extends EsaApi {
 
   getPosts(
     requestParameters: EsaApiGetPostsRequest,
-    options?: any
+    options?: any,
   ): Promise<AxiosResponse<PaginatedPosts>> {
     return super.getPosts(requestParameters, options).then((res) => {
       if (res.status === 200) {
@@ -45,7 +45,7 @@ class Client extends EsaApi {
 
   getPost(
     requestParameters: EsaApiGetPostRequest,
-    options?: any
+    options?: any,
   ): Promise<AxiosResponse<Post>> {
     return super.getPost(requestParameters, options).then(decodeName);
   }
@@ -55,11 +55,11 @@ class Client extends EsaApi {
       readonly teamName: string;
       readonly post: NewPost;
     },
-    options?: any
+    options?: any,
   ): Promise<AxiosResponse<Post>>;
   createPost(
     requestParameters: EsaApiCreatePostRequest,
-    options?: any
+    options?: any,
   ): Promise<AxiosResponse<Post>>;
   createPost(
     requestParameters:
@@ -68,7 +68,7 @@ class Client extends EsaApi {
           readonly teamName: string;
           readonly post: NewPost;
         },
-    options?: any
+    options?: any,
   ): Promise<AxiosResponse<Post>> {
     const param: EsaApiCreatePostRequest =
       "post" in requestParameters
@@ -78,18 +78,18 @@ class Client extends EsaApi {
           }
         : requestParameters;
     param.createPostBody.post.name = encodeSharpsAndSlashes(
-      param.createPostBody.post.name
+      param.createPostBody.post.name,
     );
     return super.createPost(param, options).then(decodeName);
   }
 
   updatePost(
     requestParameters: EsaApiUpdatePostRequest,
-    options?: any
+    options?: any,
   ): Promise<AxiosResponse<Post>> {
     if (requestParameters.updatePostBody.post.name) {
       requestParameters.updatePostBody.post.name = encodeSharpsAndSlashes(
-        requestParameters.updatePostBody.post.name
+        requestParameters.updatePostBody.post.name,
       );
     }
     return super.updatePost(requestParameters, options).then(decodeName);
