@@ -17,14 +17,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
-      - uses: pnpm/action-setup@v1.2.1
-        with:
-          version: 5.18.5
+          node-version: 20
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --no-optional
+        run: yarn install --immutable
       - name: Compile
-        run: pnpm build
+        run: yarn build
 
   test:
     name: Test (Node ${{ matrix.node }})
@@ -32,9 +29,9 @@ jobs:
     strategy:
       matrix:
         node:
-          - "10"
-          - "12"
-          - "14"
+          - "18"
+          - "19"
+          - "20"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -42,15 +39,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - uses: pnpm/action-setup@v1.2.1
-        with:
-          version: 5.18.5
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --no-optional
+        run: yarn install --immutable
       - name: Generate client
-        run: pnpm generate:client
+        run: yarn generate:client
       - name: Test
-        run: pnpm test
+        run: yarn test
 
   release:
     name: Release
@@ -62,21 +56,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
-      - uses: pnpm/action-setup@v1.2.1
-        with:
-          version: 5.18.5
+          node-version: 20
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --no-optional
+        run: yarn install --immutable
       - name: Build
-        run: pnpm build
+        run: yarn build
       - name: Contents of package
-        run: pnpm pack:preview
+        run: yarn pack:preview
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm semantic-release
+        run: yarn semantic-release
       - name: Check reference existence
         id: check_reference
         uses: andstor/file-existence-action@v1
