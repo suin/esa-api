@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/suin/esa-api/compare/v4.0.0...v4.0.1) (2023-09-20)
+
+
+### Bug Fixes
+
+* 🐛 利用者のtsconfigにnoUnusedLocalsがtrueのときコンパイルできない問題を解決しました。 ([4bf7368](https://github.com/suin/esa-api/commit/4bf73680b54ebb578f40ad78f8f39d16e0a3df50))
+
 # [4.0.0](https://github.com/suin/esa-api/compare/v3.2.0...v4.0.0) (2021-04-23)
 
 
