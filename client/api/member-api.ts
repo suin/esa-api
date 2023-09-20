@@ -43,7 +43,7 @@ import { PaginatedMembers } from "../models";
  * @export
  */
 export const MemberApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -57,7 +57,7 @@ export const MemberApiAxiosParamCreator = function (
     deleteMember: async (
       teamName: string,
       screenName: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deleteMember", "teamName", teamName);
@@ -89,7 +89,7 @@ export const MemberApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -98,7 +98,7 @@ export const MemberApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -132,13 +132,13 @@ export const MemberApiAxiosParamCreator = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getMembers", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/members`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -163,7 +163,7 @@ export const MemberApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -172,7 +172,7 @@ export const MemberApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (sort !== undefined) {
@@ -226,20 +226,20 @@ export const MemberApiFp = function (configuration?: Configuration) {
     async deleteMember(
       teamName: string,
       screenName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMember(
         teamName,
         screenName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -259,11 +259,11 @@ export const MemberApiFp = function (configuration?: Configuration) {
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedMembers>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getMembers(
@@ -272,13 +272,13 @@ export const MemberApiFp = function (configuration?: Configuration) {
         order,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -291,7 +291,7 @@ export const MemberApiFp = function (configuration?: Configuration) {
 export const MemberApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = MemberApiFp(configuration);
   return {
@@ -306,7 +306,7 @@ export const MemberApiFactory = function (
     deleteMember(
       teamName: string,
       screenName: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deleteMember(teamName, screenName, options)
@@ -329,7 +329,7 @@ export const MemberApiFactory = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedMembers> {
       return localVarFp
         .getMembers(teamName, sort, order, page, perPage, options)
@@ -418,13 +418,13 @@ export class MemberApi extends BaseAPI {
    */
   public deleteMember(
     requestParameters: MemberApiDeleteMemberRequest,
-    options?: any
+    options?: any,
   ) {
     return MemberApiFp(this.configuration)
       .deleteMember(
         requestParameters.teamName,
         requestParameters.screenName,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -439,7 +439,7 @@ export class MemberApi extends BaseAPI {
    */
   public getMembers(
     requestParameters: MemberApiGetMembersRequest,
-    options?: any
+    options?: any,
   ) {
     return MemberApiFp(this.configuration)
       .getMembers(
@@ -448,7 +448,7 @@ export class MemberApi extends BaseAPI {
         requestParameters.order,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }

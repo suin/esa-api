@@ -49,7 +49,7 @@ import { UpdateCommentBody } from "../models";
  * @export
  */
 export const CommentApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -69,7 +69,7 @@ export const CommentApiAxiosParamCreator = function (
       createCommentBody: CreateCommentBody,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("createComment", "teamName", teamName);
@@ -79,7 +79,7 @@ export const CommentApiAxiosParamCreator = function (
       assertParamExists(
         "createComment",
         "createCommentBody",
-        createCommentBody
+        createCommentBody,
       );
       const localVarPath = `/teams/{team_name}/posts/{post_number}/comments`
         .replace(`{${"team_name"}}`, encodeURIComponent(String(teamName)))
@@ -107,7 +107,7 @@ export const CommentApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -116,7 +116,7 @@ export const CommentApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -140,7 +140,7 @@ export const CommentApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         createCommentBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -159,7 +159,7 @@ export const CommentApiAxiosParamCreator = function (
     deleteComment: async (
       teamName: string,
       commentId: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deleteComment", "teamName", teamName);
@@ -191,7 +191,7 @@ export const CommentApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -200,7 +200,7 @@ export const CommentApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -230,7 +230,7 @@ export const CommentApiAxiosParamCreator = function (
       teamName: string,
       commentId: number,
       include?: "stargazers",
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getComment", "teamName", teamName);
@@ -262,7 +262,7 @@ export const CommentApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -271,7 +271,7 @@ export const CommentApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (include !== undefined) {
@@ -305,13 +305,13 @@ export const CommentApiAxiosParamCreator = function (
       teamName: string,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getComments", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/comments`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -336,7 +336,7 @@ export const CommentApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -345,7 +345,7 @@ export const CommentApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -385,7 +385,7 @@ export const CommentApiAxiosParamCreator = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPostComments", "teamName", teamName);
@@ -417,7 +417,7 @@ export const CommentApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -426,7 +426,7 @@ export const CommentApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -464,7 +464,7 @@ export const CommentApiAxiosParamCreator = function (
       teamName: string,
       commentId: number,
       updateCommentBody: UpdateCommentBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("updateComment", "teamName", teamName);
@@ -474,7 +474,7 @@ export const CommentApiAxiosParamCreator = function (
       assertParamExists(
         "updateComment",
         "updateCommentBody",
-        updateCommentBody
+        updateCommentBody,
       );
       const localVarPath = `/teams/{team_name}/comments/{comment_id}`
         .replace(`{${"team_name"}}`, encodeURIComponent(String(teamName)))
@@ -502,7 +502,7 @@ export const CommentApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -511,7 +511,7 @@ export const CommentApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -527,7 +527,7 @@ export const CommentApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         updateCommentBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -562,7 +562,7 @@ export const CommentApiFp = function (configuration?: Configuration) {
       createCommentBody: CreateCommentBody,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Comment>
     > {
@@ -572,13 +572,13 @@ export const CommentApiFp = function (configuration?: Configuration) {
         createCommentBody,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -592,20 +592,20 @@ export const CommentApiFp = function (configuration?: Configuration) {
     async deleteComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deleteComment(
         teamName,
         commentId,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -621,7 +621,7 @@ export const CommentApiFp = function (configuration?: Configuration) {
       teamName: string,
       commentId: number,
       include?: "stargazers",
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Comment>
     > {
@@ -629,13 +629,13 @@ export const CommentApiFp = function (configuration?: Configuration) {
         teamName,
         commentId,
         include,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -651,24 +651,24 @@ export const CommentApiFp = function (configuration?: Configuration) {
       teamName: string,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedComments>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getComments(
         teamName,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -686,11 +686,11 @@ export const CommentApiFp = function (configuration?: Configuration) {
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedComments>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getPostComments(
@@ -698,13 +698,13 @@ export const CommentApiFp = function (configuration?: Configuration) {
         postNumber,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -720,7 +720,7 @@ export const CommentApiFp = function (configuration?: Configuration) {
       teamName: string,
       commentId: number,
       updateCommentBody: UpdateCommentBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Comment>
     > {
@@ -728,13 +728,13 @@ export const CommentApiFp = function (configuration?: Configuration) {
         teamName,
         commentId,
         updateCommentBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -747,7 +747,7 @@ export const CommentApiFp = function (configuration?: Configuration) {
 export const CommentApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = CommentApiFp(configuration);
   return {
@@ -768,7 +768,7 @@ export const CommentApiFactory = function (
       createCommentBody: CreateCommentBody,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<Comment> {
       return localVarFp
         .createComment(
@@ -777,7 +777,7 @@ export const CommentApiFactory = function (
           createCommentBody,
           page,
           perPage,
-          options
+          options,
         )
         .then((request) => request(axios, basePath));
     },
@@ -792,7 +792,7 @@ export const CommentApiFactory = function (
     deleteComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deleteComment(teamName, commentId, options)
@@ -811,7 +811,7 @@ export const CommentApiFactory = function (
       teamName: string,
       commentId: number,
       include?: "stargazers",
-      options?: any
+      options?: any,
     ): AxiosPromise<Comment> {
       return localVarFp
         .getComment(teamName, commentId, include, options)
@@ -830,7 +830,7 @@ export const CommentApiFactory = function (
       teamName: string,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedComments> {
       return localVarFp
         .getComments(teamName, page, perPage, options)
@@ -851,7 +851,7 @@ export const CommentApiFactory = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedComments> {
       return localVarFp
         .getPostComments(teamName, postNumber, page, perPage, options)
@@ -870,7 +870,7 @@ export const CommentApiFactory = function (
       teamName: string,
       commentId: number,
       updateCommentBody: UpdateCommentBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<Comment> {
       return localVarFp
         .updateComment(teamName, commentId, updateCommentBody, options)
@@ -1078,7 +1078,7 @@ export class CommentApi extends BaseAPI {
    */
   public createComment(
     requestParameters: CommentApiCreateCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return CommentApiFp(this.configuration)
       .createComment(
@@ -1087,7 +1087,7 @@ export class CommentApi extends BaseAPI {
         requestParameters.createCommentBody,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1102,13 +1102,13 @@ export class CommentApi extends BaseAPI {
    */
   public deleteComment(
     requestParameters: CommentApiDeleteCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return CommentApiFp(this.configuration)
       .deleteComment(
         requestParameters.teamName,
         requestParameters.commentId,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1123,14 +1123,14 @@ export class CommentApi extends BaseAPI {
    */
   public getComment(
     requestParameters: CommentApiGetCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return CommentApiFp(this.configuration)
       .getComment(
         requestParameters.teamName,
         requestParameters.commentId,
         requestParameters.include,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1145,14 +1145,14 @@ export class CommentApi extends BaseAPI {
    */
   public getComments(
     requestParameters: CommentApiGetCommentsRequest,
-    options?: any
+    options?: any,
   ) {
     return CommentApiFp(this.configuration)
       .getComments(
         requestParameters.teamName,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1167,7 +1167,7 @@ export class CommentApi extends BaseAPI {
    */
   public getPostComments(
     requestParameters: CommentApiGetPostCommentsRequest,
-    options?: any
+    options?: any,
   ) {
     return CommentApiFp(this.configuration)
       .getPostComments(
@@ -1175,7 +1175,7 @@ export class CommentApi extends BaseAPI {
         requestParameters.postNumber,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1190,14 +1190,14 @@ export class CommentApi extends BaseAPI {
    */
   public updateComment(
     requestParameters: CommentApiUpdateCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return CommentApiFp(this.configuration)
       .updateComment(
         requestParameters.teamName,
         requestParameters.commentId,
         requestParameters.updateCommentBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }

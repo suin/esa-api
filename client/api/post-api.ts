@@ -49,7 +49,7 @@ import { UpdatePostBody } from "../models";
  * @export
  */
 export const PostApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -63,7 +63,7 @@ export const PostApiAxiosParamCreator = function (
     createPost: async (
       teamName: string,
       createPostBody: CreatePostBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("createPost", "teamName", teamName);
@@ -71,7 +71,7 @@ export const PostApiAxiosParamCreator = function (
       assertParamExists("createPost", "createPostBody", createPostBody);
       const localVarPath = `/teams/{team_name}/posts`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -96,7 +96,7 @@ export const PostApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -105,7 +105,7 @@ export const PostApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -121,7 +121,7 @@ export const PostApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         createPostBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -140,7 +140,7 @@ export const PostApiAxiosParamCreator = function (
     deletePost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deletePost", "teamName", teamName);
@@ -172,7 +172,7 @@ export const PostApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -181,7 +181,7 @@ export const PostApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -211,7 +211,7 @@ export const PostApiAxiosParamCreator = function (
       teamName: string,
       postNumber: number,
       include?: Array<"comments" | "comments.stargazers" | "stargazers">,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPost", "teamName", teamName);
@@ -243,7 +243,7 @@ export const PostApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -252,12 +252,12 @@ export const PostApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (include) {
         localVarQueryParameter["include"] = include.join(
-          COLLECTION_FORMATS.csv
+          COLLECTION_FORMATS.csv,
         );
       }
 
@@ -303,13 +303,13 @@ export const PostApiAxiosParamCreator = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPosts", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/posts`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -334,7 +334,7 @@ export const PostApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -343,7 +343,7 @@ export const PostApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (q !== undefined) {
@@ -352,7 +352,7 @@ export const PostApiAxiosParamCreator = function (
 
       if (include) {
         localVarQueryParameter["include"] = include.join(
-          COLLECTION_FORMATS.csv
+          COLLECTION_FORMATS.csv,
         );
       }
 
@@ -399,7 +399,7 @@ export const PostApiAxiosParamCreator = function (
       teamName: string,
       postNumber: number,
       updatePostBody: UpdatePostBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("updatePost", "teamName", teamName);
@@ -433,7 +433,7 @@ export const PostApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -442,7 +442,7 @@ export const PostApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -458,7 +458,7 @@ export const PostApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         updatePostBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -487,20 +487,20 @@ export const PostApiFp = function (configuration?: Configuration) {
     async createPost(
       teamName: string,
       createPostBody: CreatePostBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Post>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.createPost(
         teamName,
         createPostBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -514,20 +514,20 @@ export const PostApiFp = function (configuration?: Configuration) {
     async deletePost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deletePost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -543,7 +543,7 @@ export const PostApiFp = function (configuration?: Configuration) {
       teamName: string,
       postNumber: number,
       include?: Array<"comments" | "comments.stargazers" | "stargazers">,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Post>
     > {
@@ -551,13 +551,13 @@ export const PostApiFp = function (configuration?: Configuration) {
         teamName,
         postNumber,
         include,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -588,7 +588,7 @@ export const PostApiFp = function (configuration?: Configuration) {
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPosts>
     > {
@@ -600,13 +600,13 @@ export const PostApiFp = function (configuration?: Configuration) {
         order,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -622,7 +622,7 @@ export const PostApiFp = function (configuration?: Configuration) {
       teamName: string,
       postNumber: number,
       updatePostBody: UpdatePostBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Post>
     > {
@@ -630,13 +630,13 @@ export const PostApiFp = function (configuration?: Configuration) {
         teamName,
         postNumber,
         updatePostBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -649,7 +649,7 @@ export const PostApiFp = function (configuration?: Configuration) {
 export const PostApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = PostApiFp(configuration);
   return {
@@ -664,7 +664,7 @@ export const PostApiFactory = function (
     createPost(
       teamName: string,
       createPostBody: CreatePostBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<Post> {
       return localVarFp
         .createPost(teamName, createPostBody, options)
@@ -681,7 +681,7 @@ export const PostApiFactory = function (
     deletePost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deletePost(teamName, postNumber, options)
@@ -700,7 +700,7 @@ export const PostApiFactory = function (
       teamName: string,
       postNumber: number,
       include?: Array<"comments" | "comments.stargazers" | "stargazers">,
-      options?: any
+      options?: any,
     ): AxiosPromise<Post> {
       return localVarFp
         .getPost(teamName, postNumber, include, options)
@@ -734,7 +734,7 @@ export const PostApiFactory = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedPosts> {
       return localVarFp
         .getPosts(teamName, q, include, sort, order, page, perPage, options)
@@ -753,7 +753,7 @@ export const PostApiFactory = function (
       teamName: string,
       postNumber: number,
       updatePostBody: UpdatePostBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<Post> {
       return localVarFp
         .updatePost(teamName, postNumber, updatePostBody, options)
@@ -940,13 +940,13 @@ export class PostApi extends BaseAPI {
    */
   public createPost(
     requestParameters: PostApiCreatePostRequest,
-    options?: any
+    options?: any,
   ) {
     return PostApiFp(this.configuration)
       .createPost(
         requestParameters.teamName,
         requestParameters.createPostBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -961,13 +961,13 @@ export class PostApi extends BaseAPI {
    */
   public deletePost(
     requestParameters: PostApiDeletePostRequest,
-    options?: any
+    options?: any,
   ) {
     return PostApiFp(this.configuration)
       .deletePost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -986,7 +986,7 @@ export class PostApi extends BaseAPI {
         requestParameters.teamName,
         requestParameters.postNumber,
         requestParameters.include,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1009,7 +1009,7 @@ export class PostApi extends BaseAPI {
         requestParameters.order,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1024,14 +1024,14 @@ export class PostApi extends BaseAPI {
    */
   public updatePost(
     requestParameters: PostApiUpdatePostRequest,
-    options?: any
+    options?: any,
   ) {
     return PostApiFp(this.configuration)
       .updatePost(
         requestParameters.teamName,
         requestParameters.postNumber,
         requestParameters.updatePostBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }

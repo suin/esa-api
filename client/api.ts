@@ -20,6 +20,7 @@ export * from "./api/invitation-api";
 export * from "./api/member-api";
 export * from "./api/post-api";
 export * from "./api/star-api";
+export * from "./api/tag-api";
 export * from "./api/team-api";
 export * from "./api/user-api";
 export * from "./api/watch-api";

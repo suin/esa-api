@@ -37,27 +37,36 @@ import {
   RequiredError,
 } from "../base";
 // @ts-ignore
-import { AuthenticatedUser } from "../models";
+import { PaginatedTags } from "../models";
 /**
- * UserApi - axios parameter creator
+ * TagApi - axios parameter creator
  * @export
  */
-export const UserApiAxiosParamCreator = function (
+export const TagApiAxiosParamCreator = function (
   configuration?: Configuration,
 ) {
   return {
     /**
-     * 現在のアクセストークンで認証中のユーザーの情報を取得します。
-     * @summary 認証中のユーザーを取得する
-     * @param {'teams'} [include] teams を指定すると所属するチームの配列を含んだレスポンスを返します。
+     *
+     * @summary タグ一覧をタグ付けされた記事数の降順で取得する
+     * @param {string} teamName チーム名
+     * @param {number} [page] ページ番号
+     * @param {number} [perPage] 1ページあたりに含まれる要素数
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getAuthenticatedUser: async (
-      include?: "teams",
+    getTags: async (
+      teamName: string,
+      page?: number,
+      perPage?: number,
       options: any = {},
     ): Promise<RequestArgs> => {
-      const localVarPath = `/user`;
+      // verify required parameter 'teamName' is not null or undefined
+      assertParamExists("getTags", "teamName", teamName);
+      const localVarPath = `/teams/{team_name}/tags`.replace(
+        `{${"team_name"}}`,
+        encodeURIComponent(String(teamName)),
+      );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -93,8 +102,12 @@ export const UserApiAxiosParamCreator = function (
         configuration,
       );
 
-      if (include !== undefined) {
-        localVarQueryParameter["include"] = include;
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (perPage !== undefined) {
+        localVarQueryParameter["per_page"] = perPage;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -115,30 +128,35 @@ export const UserApiAxiosParamCreator = function (
 };
 
 /**
- * UserApi - functional programming interface
+ * TagApi - functional programming interface
  * @export
  */
-export const UserApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration);
+export const TagApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = TagApiAxiosParamCreator(configuration);
   return {
     /**
-     * 現在のアクセストークンで認証中のユーザーの情報を取得します。
-     * @summary 認証中のユーザーを取得する
-     * @param {'teams'} [include] teams を指定すると所属するチームの配列を含んだレスポンスを返します。
+     *
+     * @summary タグ一覧をタグ付けされた記事数の降順で取得する
+     * @param {string} teamName チーム名
+     * @param {number} [page] ページ番号
+     * @param {number} [perPage] 1ページあたりに含まれる要素数
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getAuthenticatedUser(
-      include?: "teams",
+    async getTags(
+      teamName: string,
+      page?: number,
+      perPage?: number,
       options?: any,
     ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string,
-      ) => AxiosPromise<AuthenticatedUser>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedTags>
     > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.getAuthenticatedUser(include, options);
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getTags(
+        teamName,
+        page,
+        perPage,
+        options,
+      );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -150,69 +168,89 @@ export const UserApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * UserApi - factory interface
+ * TagApi - factory interface
  * @export
  */
-export const UserApiFactory = function (
+export const TagApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
   axios?: AxiosInstance,
 ) {
-  const localVarFp = UserApiFp(configuration);
+  const localVarFp = TagApiFp(configuration);
   return {
     /**
-     * 現在のアクセストークンで認証中のユーザーの情報を取得します。
-     * @summary 認証中のユーザーを取得する
-     * @param {'teams'} [include] teams を指定すると所属するチームの配列を含んだレスポンスを返します。
+     *
+     * @summary タグ一覧をタグ付けされた記事数の降順で取得する
+     * @param {string} teamName チーム名
+     * @param {number} [page] ページ番号
+     * @param {number} [perPage] 1ページあたりに含まれる要素数
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getAuthenticatedUser(
-      include?: "teams",
+    getTags(
+      teamName: string,
+      page?: number,
+      perPage?: number,
       options?: any,
-    ): AxiosPromise<AuthenticatedUser> {
+    ): AxiosPromise<PaginatedTags> {
       return localVarFp
-        .getAuthenticatedUser(include, options)
+        .getTags(teamName, page, perPage, options)
         .then((request) => request(axios, basePath));
     },
   };
 };
 
 /**
- * Request parameters for getAuthenticatedUser operation in UserApi.
+ * Request parameters for getTags operation in TagApi.
  * @export
- * @interface UserApiGetAuthenticatedUserRequest
+ * @interface TagApiGetTagsRequest
  */
-export interface UserApiGetAuthenticatedUserRequest {
+export interface TagApiGetTagsRequest {
   /**
-   * teams を指定すると所属するチームの配列を含んだレスポンスを返します。
-   * @type {'teams'}
-   * @memberof UserApiGetAuthenticatedUser
+   * チーム名
+   * @type {string}
+   * @memberof TagApiGetTags
    */
-  readonly include?: "teams";
+  readonly teamName: string;
+
+  /**
+   * ページ番号
+   * @type {number}
+   * @memberof TagApiGetTags
+   */
+  readonly page?: number;
+
+  /**
+   * 1ページあたりに含まれる要素数
+   * @type {number}
+   * @memberof TagApiGetTags
+   */
+  readonly perPage?: number;
 }
 
 /**
- * UserApi - object-oriented interface
+ * TagApi - object-oriented interface
  * @export
- * @class UserApi
+ * @class TagApi
  * @extends {BaseAPI}
  */
-export class UserApi extends BaseAPI {
+export class TagApi extends BaseAPI {
   /**
-   * 現在のアクセストークンで認証中のユーザーの情報を取得します。
-   * @summary 認証中のユーザーを取得する
-   * @param {UserApiGetAuthenticatedUserRequest} requestParameters Request parameters.
+   *
+   * @summary タグ一覧をタグ付けされた記事数の降順で取得する
+   * @param {TagApiGetTagsRequest} requestParameters Request parameters.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof UserApi
+   * @memberof TagApi
    */
-  public getAuthenticatedUser(
-    requestParameters: UserApiGetAuthenticatedUserRequest = {},
-    options?: any,
-  ) {
-    return UserApiFp(this.configuration)
-      .getAuthenticatedUser(requestParameters.include, options)
+  public getTags(requestParameters: TagApiGetTagsRequest, options?: any) {
+    return TagApiFp(this.configuration)
+      .getTags(
+        requestParameters.teamName,
+        requestParameters.page,
+        requestParameters.perPage,
+        options,
+      )
       .then((request) => request(this.axios, this.basePath));
   }
 }

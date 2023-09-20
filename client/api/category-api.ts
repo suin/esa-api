@@ -45,7 +45,7 @@ import { BatchMoveResult } from "../models";
  * @export
  */
 export const CategoryApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -59,7 +59,7 @@ export const CategoryApiAxiosParamCreator = function (
     batchMoveCategory: async (
       teamName: string,
       batchMoveOptions: BatchMoveOptions,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("batchMoveCategory", "teamName", teamName);
@@ -67,11 +67,11 @@ export const CategoryApiAxiosParamCreator = function (
       assertParamExists(
         "batchMoveCategory",
         "batchMoveOptions",
-        batchMoveOptions
+        batchMoveOptions,
       );
       const localVarPath = `/teams/{team_name}/categories/batch_move`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -96,7 +96,7 @@ export const CategoryApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -105,7 +105,7 @@ export const CategoryApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -121,7 +121,7 @@ export const CategoryApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         batchMoveOptions,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -150,23 +150,24 @@ export const CategoryApiFp = function (configuration?: Configuration) {
     async batchMoveCategory(
       teamName: string,
       batchMoveOptions: BatchMoveOptions,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<BatchMoveResult>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.batchMoveCategory(
-        teamName,
-        batchMoveOptions,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.batchMoveCategory(
+          teamName,
+          batchMoveOptions,
+          options,
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -179,7 +180,7 @@ export const CategoryApiFp = function (configuration?: Configuration) {
 export const CategoryApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = CategoryApiFp(configuration);
   return {
@@ -194,7 +195,7 @@ export const CategoryApiFactory = function (
     batchMoveCategory(
       teamName: string,
       batchMoveOptions: BatchMoveOptions,
-      options?: any
+      options?: any,
     ): AxiosPromise<BatchMoveResult> {
       return localVarFp
         .batchMoveCategory(teamName, batchMoveOptions, options)
@@ -241,13 +242,13 @@ export class CategoryApi extends BaseAPI {
    */
   public batchMoveCategory(
     requestParameters: CategoryApiBatchMoveCategoryRequest,
-    options?: any
+    options?: any,
   ) {
     return CategoryApiFp(this.configuration)
       .batchMoveCategory(
         requestParameters.teamName,
         requestParameters.batchMoveOptions,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }

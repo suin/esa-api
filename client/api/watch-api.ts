@@ -43,7 +43,7 @@ import { PaginatedWatchers } from "../models";
  * @export
  */
 export const WatchApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -61,7 +61,7 @@ export const WatchApiAxiosParamCreator = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getWatchers", "teamName", teamName);
@@ -93,7 +93,7 @@ export const WatchApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -102,7 +102,7 @@ export const WatchApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -138,7 +138,7 @@ export const WatchApiAxiosParamCreator = function (
     unwachPost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("unwachPost", "teamName", teamName);
@@ -170,7 +170,7 @@ export const WatchApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -179,7 +179,7 @@ export const WatchApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -207,7 +207,7 @@ export const WatchApiAxiosParamCreator = function (
     watchPost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("watchPost", "teamName", teamName);
@@ -239,7 +239,7 @@ export const WatchApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -248,7 +248,7 @@ export const WatchApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -290,11 +290,11 @@ export const WatchApiFp = function (configuration?: Configuration) {
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedWatchers>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getWatchers(
@@ -302,13 +302,13 @@ export const WatchApiFp = function (configuration?: Configuration) {
         postNumber,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -322,20 +322,20 @@ export const WatchApiFp = function (configuration?: Configuration) {
     async unwachPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.unwachPost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -349,20 +349,20 @@ export const WatchApiFp = function (configuration?: Configuration) {
     async watchPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.watchPost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -375,7 +375,7 @@ export const WatchApiFp = function (configuration?: Configuration) {
 export const WatchApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = WatchApiFp(configuration);
   return {
@@ -394,7 +394,7 @@ export const WatchApiFactory = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedWatchers> {
       return localVarFp
         .getWatchers(teamName, postNumber, page, perPage, options)
@@ -411,7 +411,7 @@ export const WatchApiFactory = function (
     unwachPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .unwachPost(teamName, postNumber, options)
@@ -428,7 +428,7 @@ export const WatchApiFactory = function (
     watchPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .watchPost(teamName, postNumber, options)
@@ -531,7 +531,7 @@ export class WatchApi extends BaseAPI {
    */
   public getWatchers(
     requestParameters: WatchApiGetWatchersRequest,
-    options?: any
+    options?: any,
   ) {
     return WatchApiFp(this.configuration)
       .getWatchers(
@@ -539,7 +539,7 @@ export class WatchApi extends BaseAPI {
         requestParameters.postNumber,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -554,13 +554,13 @@ export class WatchApi extends BaseAPI {
    */
   public unwachPost(
     requestParameters: WatchApiUnwachPostRequest,
-    options?: any
+    options?: any,
   ) {
     return WatchApiFp(this.configuration)
       .unwachPost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -578,7 +578,7 @@ export class WatchApi extends BaseAPI {
       .watchPost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }

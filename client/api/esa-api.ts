@@ -69,6 +69,8 @@ import { PaginatedPosts } from "../models";
 // @ts-ignore
 import { PaginatedStargazers } from "../models";
 // @ts-ignore
+import { PaginatedTags } from "../models";
+// @ts-ignore
 import { PaginatedTeams } from "../models";
 // @ts-ignore
 import { PaginatedWatchers } from "../models";
@@ -87,7 +89,7 @@ import { UpdatePostBody } from "../models";
  * @export
  */
 export const EsaApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -101,7 +103,7 @@ export const EsaApiAxiosParamCreator = function (
     batchMoveCategory: async (
       teamName: string,
       batchMoveOptions: BatchMoveOptions,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("batchMoveCategory", "teamName", teamName);
@@ -109,11 +111,11 @@ export const EsaApiAxiosParamCreator = function (
       assertParamExists(
         "batchMoveCategory",
         "batchMoveOptions",
-        batchMoveOptions
+        batchMoveOptions,
       );
       const localVarPath = `/teams/{team_name}/categories/batch_move`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -138,7 +140,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -147,7 +149,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -163,7 +165,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         batchMoveOptions,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -188,7 +190,7 @@ export const EsaApiAxiosParamCreator = function (
       createCommentBody: CreateCommentBody,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("createComment", "teamName", teamName);
@@ -198,7 +200,7 @@ export const EsaApiAxiosParamCreator = function (
       assertParamExists(
         "createComment",
         "createCommentBody",
-        createCommentBody
+        createCommentBody,
       );
       const localVarPath = `/teams/{team_name}/posts/{post_number}/comments`
         .replace(`{${"team_name"}}`, encodeURIComponent(String(teamName)))
@@ -226,7 +228,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -235,7 +237,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -259,7 +261,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         createCommentBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -278,7 +280,7 @@ export const EsaApiAxiosParamCreator = function (
     createEmoji: async (
       teamName: string,
       createEmojiBody: CreateEmojiBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("createEmoji", "teamName", teamName);
@@ -286,7 +288,7 @@ export const EsaApiAxiosParamCreator = function (
       assertParamExists("createEmoji", "createEmojiBody", createEmojiBody);
       const localVarPath = `/teams/{team_name}/emojis`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -311,7 +313,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -320,7 +322,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -336,7 +338,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         createEmojiBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -355,7 +357,7 @@ export const EsaApiAxiosParamCreator = function (
     createPost: async (
       teamName: string,
       createPostBody: CreatePostBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("createPost", "teamName", teamName);
@@ -363,7 +365,7 @@ export const EsaApiAxiosParamCreator = function (
       assertParamExists("createPost", "createPostBody", createPostBody);
       const localVarPath = `/teams/{team_name}/posts`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -388,7 +390,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -397,7 +399,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -413,7 +415,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         createPostBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -432,7 +434,7 @@ export const EsaApiAxiosParamCreator = function (
     deleteComment: async (
       teamName: string,
       commentId: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deleteComment", "teamName", teamName);
@@ -464,7 +466,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -473,7 +475,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -501,7 +503,7 @@ export const EsaApiAxiosParamCreator = function (
     deleteEmoji: async (
       teamName: string,
       code: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deleteEmoji", "teamName", teamName);
@@ -533,7 +535,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -542,7 +544,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -570,7 +572,7 @@ export const EsaApiAxiosParamCreator = function (
     deleteMember: async (
       teamName: string,
       screenName: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deleteMember", "teamName", teamName);
@@ -602,7 +604,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -611,7 +613,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -639,7 +641,7 @@ export const EsaApiAxiosParamCreator = function (
     deletePost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deletePost", "teamName", teamName);
@@ -671,7 +673,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -680,7 +682,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -708,7 +710,7 @@ export const EsaApiAxiosParamCreator = function (
     disinvite: async (
       teamName: string,
       code: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("disinvite", "teamName", teamName);
@@ -740,7 +742,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -749,7 +751,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -775,7 +777,7 @@ export const EsaApiAxiosParamCreator = function (
      */
     getAuthenticatedUser: async (
       include?: "teams",
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       const localVarPath = `/user`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -801,7 +803,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -810,7 +812,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (include !== undefined) {
@@ -844,7 +846,7 @@ export const EsaApiAxiosParamCreator = function (
       teamName: string,
       commentId: number,
       include?: "stargazers",
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getComment", "teamName", teamName);
@@ -876,7 +878,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -885,7 +887,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (include !== undefined) {
@@ -921,7 +923,7 @@ export const EsaApiAxiosParamCreator = function (
       commentId: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getCommentStargazers", "teamName", teamName);
@@ -953,7 +955,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -962,7 +964,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -1000,13 +1002,13 @@ export const EsaApiAxiosParamCreator = function (
       teamName: string,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getComments", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/comments`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1031,7 +1033,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1040,7 +1042,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -1076,13 +1078,13 @@ export const EsaApiAxiosParamCreator = function (
     getEmojis: async (
       teamName: string,
       include?: "all",
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getEmojis", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/emojis`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1107,7 +1109,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1116,7 +1118,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (include !== undefined) {
@@ -1146,13 +1148,13 @@ export const EsaApiAxiosParamCreator = function (
      */
     getInvitations: async (
       teamName: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getInvitations", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/invitations`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1177,7 +1179,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1186,7 +1188,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -1220,13 +1222,13 @@ export const EsaApiAxiosParamCreator = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getMembers", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/members`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1251,7 +1253,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1260,7 +1262,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (sort !== undefined) {
@@ -1306,7 +1308,7 @@ export const EsaApiAxiosParamCreator = function (
       teamName: string,
       postNumber: number,
       include?: Array<"comments" | "comments.stargazers" | "stargazers">,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPost", "teamName", teamName);
@@ -1338,7 +1340,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1347,12 +1349,12 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (include) {
         localVarQueryParameter["include"] = include.join(
-          COLLECTION_FORMATS.csv
+          COLLECTION_FORMATS.csv,
         );
       }
 
@@ -1385,7 +1387,7 @@ export const EsaApiAxiosParamCreator = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPostComments", "teamName", teamName);
@@ -1417,7 +1419,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1426,7 +1428,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -1466,7 +1468,7 @@ export const EsaApiAxiosParamCreator = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPostStargazers", "teamName", teamName);
@@ -1498,7 +1500,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1507,7 +1509,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -1560,13 +1562,13 @@ export const EsaApiAxiosParamCreator = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPosts", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/posts`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1591,7 +1593,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1600,7 +1602,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (q !== undefined) {
@@ -1609,7 +1611,7 @@ export const EsaApiAxiosParamCreator = function (
 
       if (include) {
         localVarQueryParameter["include"] = include.join(
-          COLLECTION_FORMATS.csv
+          COLLECTION_FORMATS.csv,
         );
       }
 
@@ -1645,20 +1647,24 @@ export const EsaApiAxiosParamCreator = function (
     },
     /**
      *
-     * @summary 所属するチームを取得する
+     * @summary タグ一覧をタグ付けされた記事数の降順で取得する
      * @param {string} teamName チーム名
+     * @param {number} [page] ページ番号
+     * @param {number} [perPage] 1ページあたりに含まれる要素数
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getTeam: async (
+    getTags: async (
       teamName: string,
-      options: any = {}
+      page?: number,
+      perPage?: number,
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
-      assertParamExists("getTeam", "teamName", teamName);
-      const localVarPath = `/teams/{team_name}`.replace(
+      assertParamExists("getTags", "teamName", teamName);
+      const localVarPath = `/teams/{team_name}/tags`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1683,7 +1689,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1692,7 +1698,81 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
+      );
+
+      if (page !== undefined) {
+        localVarQueryParameter["page"] = page;
+      }
+
+      if (perPage !== undefined) {
+        localVarQueryParameter["per_page"] = perPage;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary 所属するチームを取得する
+     * @param {string} teamName チーム名
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getTeam: async (
+      teamName: string,
+      options: any = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'teamName' is not null or undefined
+      assertParamExists("getTeam", "teamName", teamName);
+      const localVarPath = `/teams/{team_name}`.replace(
+        `{${"team_name"}}`,
+        encodeURIComponent(String(teamName)),
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication AccessTokenHeader required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      // authentication AccessTokenQueryParam required
+      await setApiKeyToObject(
+        localVarQueryParameter,
+        "access_token",
+        configuration,
+      );
+
+      // authentication OAuth2 required
+      // oauth required
+      await setOAuthToObject(
+        localVarHeaderParameter,
+        "OAuth2",
+        ["read"],
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -1718,13 +1798,13 @@ export const EsaApiAxiosParamCreator = function (
      */
     getTeamStats: async (
       teamName: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getTeamStats", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/stats`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1749,7 +1829,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1758,7 +1838,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -1786,7 +1866,7 @@ export const EsaApiAxiosParamCreator = function (
     getTeams: async (
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       const localVarPath = `/teams`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1812,7 +1892,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1821,7 +1901,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -1861,7 +1941,7 @@ export const EsaApiAxiosParamCreator = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getWatchers", "teamName", teamName);
@@ -1893,7 +1973,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1902,7 +1982,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -1938,7 +2018,7 @@ export const EsaApiAxiosParamCreator = function (
     invite: async (
       teamName: string,
       inviteBody: InviteBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("invite", "teamName", teamName);
@@ -1946,7 +2026,7 @@ export const EsaApiAxiosParamCreator = function (
       assertParamExists("invite", "inviteBody", inviteBody);
       const localVarPath = `/teams/{team_name}/invitations`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1971,7 +2051,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -1980,7 +2060,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -1996,7 +2076,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         inviteBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -2017,7 +2097,7 @@ export const EsaApiAxiosParamCreator = function (
       teamName: string,
       commentId: number,
       newStar: NewStar,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("starComment", "teamName", teamName);
@@ -2051,7 +2131,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2060,7 +2140,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -2076,7 +2156,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         newStar,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -2097,7 +2177,7 @@ export const EsaApiAxiosParamCreator = function (
       teamName: string,
       postNumber: number,
       newStar: NewStar,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("starPost", "teamName", teamName);
@@ -2131,7 +2211,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2140,7 +2220,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -2156,7 +2236,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         newStar,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -2175,7 +2255,7 @@ export const EsaApiAxiosParamCreator = function (
     unstarComment: async (
       teamName: string,
       commentId: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("unstarComment", "teamName", teamName);
@@ -2207,7 +2287,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2216,7 +2296,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -2244,7 +2324,7 @@ export const EsaApiAxiosParamCreator = function (
     unstarPost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("unstarPost", "teamName", teamName);
@@ -2276,7 +2356,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2285,7 +2365,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -2313,7 +2393,7 @@ export const EsaApiAxiosParamCreator = function (
     unwachPost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("unwachPost", "teamName", teamName);
@@ -2345,7 +2425,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2354,7 +2434,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -2384,7 +2464,7 @@ export const EsaApiAxiosParamCreator = function (
       teamName: string,
       commentId: number,
       updateCommentBody: UpdateCommentBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("updateComment", "teamName", teamName);
@@ -2394,7 +2474,7 @@ export const EsaApiAxiosParamCreator = function (
       assertParamExists(
         "updateComment",
         "updateCommentBody",
-        updateCommentBody
+        updateCommentBody,
       );
       const localVarPath = `/teams/{team_name}/comments/{comment_id}`
         .replace(`{${"team_name"}}`, encodeURIComponent(String(teamName)))
@@ -2422,7 +2502,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2431,7 +2511,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -2447,7 +2527,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         updateCommentBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -2468,7 +2548,7 @@ export const EsaApiAxiosParamCreator = function (
       teamName: string,
       postNumber: number,
       updatePostBody: UpdatePostBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("updatePost", "teamName", teamName);
@@ -2502,7 +2582,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2511,7 +2591,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -2527,7 +2607,7 @@ export const EsaApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         updatePostBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -2546,7 +2626,7 @@ export const EsaApiAxiosParamCreator = function (
     watchPost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("watchPost", "teamName", teamName);
@@ -2578,7 +2658,7 @@ export const EsaApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -2587,7 +2667,7 @@ export const EsaApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -2625,23 +2705,24 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async batchMoveCategory(
       teamName: string,
       batchMoveOptions: BatchMoveOptions,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<BatchMoveResult>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.batchMoveCategory(
-        teamName,
-        batchMoveOptions,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.batchMoveCategory(
+          teamName,
+          batchMoveOptions,
+          options,
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2661,7 +2742,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       createCommentBody: CreateCommentBody,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Comment>
     > {
@@ -2671,13 +2752,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         createCommentBody,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2691,20 +2772,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async createEmoji(
       teamName: string,
       createEmojiBody: CreateEmojiBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreatedEmoji>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.createEmoji(
         teamName,
         createEmojiBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2718,20 +2799,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async createPost(
       teamName: string,
       createPostBody: CreatePostBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Post>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.createPost(
         teamName,
         createPostBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2745,20 +2826,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async deleteComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deleteComment(
         teamName,
         commentId,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2772,20 +2853,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async deleteEmoji(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deleteEmoji(
         teamName,
         code,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2799,20 +2880,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async deleteMember(
       teamName: string,
       screenName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMember(
         teamName,
         screenName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2826,20 +2907,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async deletePost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deletePost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2853,20 +2934,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async disinvite(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.disinvite(
         teamName,
         code,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2878,22 +2959,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
      */
     async getAuthenticatedUser(
       include?: "teams",
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<AuthenticatedUser>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getAuthenticatedUser(
-        include,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getAuthenticatedUser(include, options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2909,7 +2988,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       teamName: string,
       commentId: number,
       include?: "stargazers",
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Comment>
     > {
@@ -2917,13 +2996,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         teamName,
         commentId,
         include,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2941,25 +3020,26 @@ export const EsaApiFp = function (configuration?: Configuration) {
       commentId: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedStargazers>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getCommentStargazers(
-        teamName,
-        commentId,
-        page,
-        perPage,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getCommentStargazers(
+          teamName,
+          commentId,
+          page,
+          perPage,
+          options,
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -2975,24 +3055,24 @@ export const EsaApiFp = function (configuration?: Configuration) {
       teamName: string,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedComments>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getComments(
         teamName,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3006,20 +3086,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async getEmojis(
       teamName: string,
       include?: "all",
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmojiList>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getEmojis(
         teamName,
         include,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3031,19 +3111,19 @@ export const EsaApiFp = function (configuration?: Configuration) {
      */
     async getInvitations(
       teamName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvitationList>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getInvitations(
         teamName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3063,11 +3143,11 @@ export const EsaApiFp = function (configuration?: Configuration) {
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedMembers>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getMembers(
@@ -3076,13 +3156,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         order,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3098,7 +3178,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       teamName: string,
       postNumber: number,
       include?: Array<"comments" | "comments.stargazers" | "stargazers">,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Post>
     > {
@@ -3106,13 +3186,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         teamName,
         postNumber,
         include,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3130,11 +3210,11 @@ export const EsaApiFp = function (configuration?: Configuration) {
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedComments>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getPostComments(
@@ -3142,13 +3222,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         postNumber,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3166,25 +3246,26 @@ export const EsaApiFp = function (configuration?: Configuration) {
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedStargazers>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getPostStargazers(
-        teamName,
-        postNumber,
-        page,
-        perPage,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getPostStargazers(
+          teamName,
+          postNumber,
+          page,
+          perPage,
+          options,
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3215,7 +3296,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedPosts>
     > {
@@ -3227,13 +3308,43 @@ export const EsaApiFp = function (configuration?: Configuration) {
         order,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
+      );
+    },
+    /**
+     *
+     * @summary タグ一覧をタグ付けされた記事数の降順で取得する
+     * @param {string} teamName チーム名
+     * @param {number} [page] ページ番号
+     * @param {number} [perPage] 1ページあたりに含まれる要素数
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getTags(
+      teamName: string,
+      page?: number,
+      perPage?: number,
+      options?: any,
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedTags>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getTags(
+        teamName,
+        page,
+        perPage,
+        options,
+      );
+      return createRequestFunction(
+        localVarAxiosArgs,
+        globalAxios,
+        BASE_PATH,
+        configuration,
       );
     },
     /**
@@ -3245,19 +3356,19 @@ export const EsaApiFp = function (configuration?: Configuration) {
      */
     async getTeam(
       teamName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getTeam(
         teamName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3269,19 +3380,19 @@ export const EsaApiFp = function (configuration?: Configuration) {
      */
     async getTeamStats(
       teamName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TeamStats>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getTeamStats(
         teamName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3295,20 +3406,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async getTeams(
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedTeams>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getTeams(
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3326,11 +3437,11 @@ export const EsaApiFp = function (configuration?: Configuration) {
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedWatchers>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getWatchers(
@@ -3338,13 +3449,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         postNumber,
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3358,20 +3469,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async invite(
       teamName: string,
       inviteBody: InviteBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvitationList>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.invite(
         teamName,
         inviteBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3387,7 +3498,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       teamName: string,
       commentId: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
@@ -3395,13 +3506,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         teamName,
         commentId,
         newStar,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3417,7 +3528,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       teamName: string,
       postNumber: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
@@ -3425,13 +3536,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         teamName,
         postNumber,
         newStar,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3445,20 +3556,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async unstarComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.unstarComment(
         teamName,
         commentId,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3472,20 +3583,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async unstarPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.unstarPost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3499,20 +3610,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async unwachPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.unwachPost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3528,7 +3639,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       teamName: string,
       commentId: number,
       updateCommentBody: UpdateCommentBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Comment>
     > {
@@ -3536,13 +3647,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         teamName,
         commentId,
         updateCommentBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3558,7 +3669,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
       teamName: string,
       postNumber: number,
       updatePostBody: UpdatePostBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Post>
     > {
@@ -3566,13 +3677,13 @@ export const EsaApiFp = function (configuration?: Configuration) {
         teamName,
         postNumber,
         updatePostBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -3586,20 +3697,20 @@ export const EsaApiFp = function (configuration?: Configuration) {
     async watchPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.watchPost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -3612,7 +3723,7 @@ export const EsaApiFp = function (configuration?: Configuration) {
 export const EsaApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = EsaApiFp(configuration);
   return {
@@ -3627,7 +3738,7 @@ export const EsaApiFactory = function (
     batchMoveCategory(
       teamName: string,
       batchMoveOptions: BatchMoveOptions,
-      options?: any
+      options?: any,
     ): AxiosPromise<BatchMoveResult> {
       return localVarFp
         .batchMoveCategory(teamName, batchMoveOptions, options)
@@ -3650,7 +3761,7 @@ export const EsaApiFactory = function (
       createCommentBody: CreateCommentBody,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<Comment> {
       return localVarFp
         .createComment(
@@ -3659,7 +3770,7 @@ export const EsaApiFactory = function (
           createCommentBody,
           page,
           perPage,
-          options
+          options,
         )
         .then((request) => request(axios, basePath));
     },
@@ -3674,7 +3785,7 @@ export const EsaApiFactory = function (
     createEmoji(
       teamName: string,
       createEmojiBody: CreateEmojiBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<CreatedEmoji> {
       return localVarFp
         .createEmoji(teamName, createEmojiBody, options)
@@ -3691,7 +3802,7 @@ export const EsaApiFactory = function (
     createPost(
       teamName: string,
       createPostBody: CreatePostBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<Post> {
       return localVarFp
         .createPost(teamName, createPostBody, options)
@@ -3708,7 +3819,7 @@ export const EsaApiFactory = function (
     deleteComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deleteComment(teamName, commentId, options)
@@ -3725,7 +3836,7 @@ export const EsaApiFactory = function (
     deleteEmoji(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deleteEmoji(teamName, code, options)
@@ -3742,7 +3853,7 @@ export const EsaApiFactory = function (
     deleteMember(
       teamName: string,
       screenName: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deleteMember(teamName, screenName, options)
@@ -3759,7 +3870,7 @@ export const EsaApiFactory = function (
     deletePost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deletePost(teamName, postNumber, options)
@@ -3776,7 +3887,7 @@ export const EsaApiFactory = function (
     disinvite(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .disinvite(teamName, code, options)
@@ -3791,7 +3902,7 @@ export const EsaApiFactory = function (
      */
     getAuthenticatedUser(
       include?: "teams",
-      options?: any
+      options?: any,
     ): AxiosPromise<AuthenticatedUser> {
       return localVarFp
         .getAuthenticatedUser(include, options)
@@ -3810,7 +3921,7 @@ export const EsaApiFactory = function (
       teamName: string,
       commentId: number,
       include?: "stargazers",
-      options?: any
+      options?: any,
     ): AxiosPromise<Comment> {
       return localVarFp
         .getComment(teamName, commentId, include, options)
@@ -3831,7 +3942,7 @@ export const EsaApiFactory = function (
       commentId: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedStargazers> {
       return localVarFp
         .getCommentStargazers(teamName, commentId, page, perPage, options)
@@ -3850,7 +3961,7 @@ export const EsaApiFactory = function (
       teamName: string,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedComments> {
       return localVarFp
         .getComments(teamName, page, perPage, options)
@@ -3867,7 +3978,7 @@ export const EsaApiFactory = function (
     getEmojis(
       teamName: string,
       include?: "all",
-      options?: any
+      options?: any,
     ): AxiosPromise<EmojiList> {
       return localVarFp
         .getEmojis(teamName, include, options)
@@ -3882,7 +3993,7 @@ export const EsaApiFactory = function (
      */
     getInvitations(
       teamName: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<InvitationList> {
       return localVarFp
         .getInvitations(teamName, options)
@@ -3905,7 +4016,7 @@ export const EsaApiFactory = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedMembers> {
       return localVarFp
         .getMembers(teamName, sort, order, page, perPage, options)
@@ -3924,7 +4035,7 @@ export const EsaApiFactory = function (
       teamName: string,
       postNumber: number,
       include?: Array<"comments" | "comments.stargazers" | "stargazers">,
-      options?: any
+      options?: any,
     ): AxiosPromise<Post> {
       return localVarFp
         .getPost(teamName, postNumber, include, options)
@@ -3945,7 +4056,7 @@ export const EsaApiFactory = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedComments> {
       return localVarFp
         .getPostComments(teamName, postNumber, page, perPage, options)
@@ -3966,7 +4077,7 @@ export const EsaApiFactory = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedStargazers> {
       return localVarFp
         .getPostStargazers(teamName, postNumber, page, perPage, options)
@@ -4000,10 +4111,29 @@ export const EsaApiFactory = function (
       order?: "asc" | "desc",
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedPosts> {
       return localVarFp
         .getPosts(teamName, q, include, sort, order, page, perPage, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary タグ一覧をタグ付けされた記事数の降順で取得する
+     * @param {string} teamName チーム名
+     * @param {number} [page] ページ番号
+     * @param {number} [perPage] 1ページあたりに含まれる要素数
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getTags(
+      teamName: string,
+      page?: number,
+      perPage?: number,
+      options?: any,
+    ): AxiosPromise<PaginatedTags> {
+      return localVarFp
+        .getTags(teamName, page, perPage, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -4041,7 +4171,7 @@ export const EsaApiFactory = function (
     getTeams(
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedTeams> {
       return localVarFp
         .getTeams(page, perPage, options)
@@ -4062,7 +4192,7 @@ export const EsaApiFactory = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedWatchers> {
       return localVarFp
         .getWatchers(teamName, postNumber, page, perPage, options)
@@ -4079,7 +4209,7 @@ export const EsaApiFactory = function (
     invite(
       teamName: string,
       inviteBody: InviteBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<InvitationList> {
       return localVarFp
         .invite(teamName, inviteBody, options)
@@ -4098,7 +4228,7 @@ export const EsaApiFactory = function (
       teamName: string,
       commentId: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .starComment(teamName, commentId, newStar, options)
@@ -4117,7 +4247,7 @@ export const EsaApiFactory = function (
       teamName: string,
       postNumber: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .starPost(teamName, postNumber, newStar, options)
@@ -4134,7 +4264,7 @@ export const EsaApiFactory = function (
     unstarComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .unstarComment(teamName, commentId, options)
@@ -4151,7 +4281,7 @@ export const EsaApiFactory = function (
     unstarPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .unstarPost(teamName, postNumber, options)
@@ -4168,7 +4298,7 @@ export const EsaApiFactory = function (
     unwachPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .unwachPost(teamName, postNumber, options)
@@ -4187,7 +4317,7 @@ export const EsaApiFactory = function (
       teamName: string,
       commentId: number,
       updateCommentBody: UpdateCommentBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<Comment> {
       return localVarFp
         .updateComment(teamName, commentId, updateCommentBody, options)
@@ -4206,7 +4336,7 @@ export const EsaApiFactory = function (
       teamName: string,
       postNumber: number,
       updatePostBody: UpdatePostBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<Post> {
       return localVarFp
         .updatePost(teamName, postNumber, updatePostBody, options)
@@ -4223,7 +4353,7 @@ export const EsaApiFactory = function (
     watchPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .watchPost(teamName, postNumber, options)
@@ -4786,6 +4916,34 @@ export interface EsaApiGetPostsRequest {
 }
 
 /**
+ * Request parameters for getTags operation in EsaApi.
+ * @export
+ * @interface EsaApiGetTagsRequest
+ */
+export interface EsaApiGetTagsRequest {
+  /**
+   * チーム名
+   * @type {string}
+   * @memberof EsaApiGetTags
+   */
+  readonly teamName: string;
+
+  /**
+   * ページ番号
+   * @type {number}
+   * @memberof EsaApiGetTags
+   */
+  readonly page?: number;
+
+  /**
+   * 1ページあたりに含まれる要素数
+   * @type {number}
+   * @memberof EsaApiGetTags
+   */
+  readonly perPage?: number;
+}
+
+/**
  * Request parameters for getTeam operation in EsaApi.
  * @export
  * @interface EsaApiGetTeamRequest
@@ -5103,13 +5261,13 @@ export class EsaApi extends BaseAPI {
    */
   public batchMoveCategory(
     requestParameters: EsaApiBatchMoveCategoryRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .batchMoveCategory(
         requestParameters.teamName,
         requestParameters.batchMoveOptions,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5124,7 +5282,7 @@ export class EsaApi extends BaseAPI {
    */
   public createComment(
     requestParameters: EsaApiCreateCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .createComment(
@@ -5133,7 +5291,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.createCommentBody,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5148,13 +5306,13 @@ export class EsaApi extends BaseAPI {
    */
   public createEmoji(
     requestParameters: EsaApiCreateEmojiRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .createEmoji(
         requestParameters.teamName,
         requestParameters.createEmojiBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5172,7 +5330,7 @@ export class EsaApi extends BaseAPI {
       .createPost(
         requestParameters.teamName,
         requestParameters.createPostBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5187,13 +5345,13 @@ export class EsaApi extends BaseAPI {
    */
   public deleteComment(
     requestParameters: EsaApiDeleteCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .deleteComment(
         requestParameters.teamName,
         requestParameters.commentId,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5208,7 +5366,7 @@ export class EsaApi extends BaseAPI {
    */
   public deleteEmoji(
     requestParameters: EsaApiDeleteEmojiRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .deleteEmoji(requestParameters.teamName, requestParameters.code, options)
@@ -5225,13 +5383,13 @@ export class EsaApi extends BaseAPI {
    */
   public deleteMember(
     requestParameters: EsaApiDeleteMemberRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .deleteMember(
         requestParameters.teamName,
         requestParameters.screenName,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5249,7 +5407,7 @@ export class EsaApi extends BaseAPI {
       .deletePost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5278,7 +5436,7 @@ export class EsaApi extends BaseAPI {
    */
   public getAuthenticatedUser(
     requestParameters: EsaApiGetAuthenticatedUserRequest = {},
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getAuthenticatedUser(requestParameters.include, options)
@@ -5299,7 +5457,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.teamName,
         requestParameters.commentId,
         requestParameters.include,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5314,7 +5472,7 @@ export class EsaApi extends BaseAPI {
    */
   public getCommentStargazers(
     requestParameters: EsaApiGetCommentStargazersRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getCommentStargazers(
@@ -5322,7 +5480,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.commentId,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5337,14 +5495,14 @@ export class EsaApi extends BaseAPI {
    */
   public getComments(
     requestParameters: EsaApiGetCommentsRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getComments(
         requestParameters.teamName,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5373,7 +5531,7 @@ export class EsaApi extends BaseAPI {
    */
   public getInvitations(
     requestParameters: EsaApiGetInvitationsRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getInvitations(requestParameters.teamName, options)
@@ -5396,7 +5554,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.order,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5415,7 +5573,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.teamName,
         requestParameters.postNumber,
         requestParameters.include,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5430,7 +5588,7 @@ export class EsaApi extends BaseAPI {
    */
   public getPostComments(
     requestParameters: EsaApiGetPostCommentsRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getPostComments(
@@ -5438,7 +5596,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.postNumber,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5453,7 +5611,7 @@ export class EsaApi extends BaseAPI {
    */
   public getPostStargazers(
     requestParameters: EsaApiGetPostStargazersRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getPostStargazers(
@@ -5461,7 +5619,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.postNumber,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5484,7 +5642,26 @@ export class EsaApi extends BaseAPI {
         requestParameters.order,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
+      )
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary タグ一覧をタグ付けされた記事数の降順で取得する
+   * @param {EsaApiGetTagsRequest} requestParameters Request parameters.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof EsaApi
+   */
+  public getTags(requestParameters: EsaApiGetTagsRequest, options?: any) {
+    return EsaApiFp(this.configuration)
+      .getTags(
+        requestParameters.teamName,
+        requestParameters.page,
+        requestParameters.perPage,
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5513,7 +5690,7 @@ export class EsaApi extends BaseAPI {
    */
   public getTeamStats(
     requestParameters: EsaApiGetTeamStatsRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getTeamStats(requestParameters.teamName, options)
@@ -5530,7 +5707,7 @@ export class EsaApi extends BaseAPI {
    */
   public getTeams(
     requestParameters: EsaApiGetTeamsRequest = {},
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getTeams(requestParameters.page, requestParameters.perPage, options)
@@ -5547,7 +5724,7 @@ export class EsaApi extends BaseAPI {
    */
   public getWatchers(
     requestParameters: EsaApiGetWatchersRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .getWatchers(
@@ -5555,7 +5732,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.postNumber,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5584,14 +5761,14 @@ export class EsaApi extends BaseAPI {
    */
   public starComment(
     requestParameters: EsaApiStarCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .starComment(
         requestParameters.teamName,
         requestParameters.commentId,
         requestParameters.newStar,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5610,7 +5787,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.teamName,
         requestParameters.postNumber,
         requestParameters.newStar,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5625,13 +5802,13 @@ export class EsaApi extends BaseAPI {
    */
   public unstarComment(
     requestParameters: EsaApiUnstarCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .unstarComment(
         requestParameters.teamName,
         requestParameters.commentId,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5649,7 +5826,7 @@ export class EsaApi extends BaseAPI {
       .unstarPost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5667,7 +5844,7 @@ export class EsaApi extends BaseAPI {
       .unwachPost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5682,14 +5859,14 @@ export class EsaApi extends BaseAPI {
    */
   public updateComment(
     requestParameters: EsaApiUpdateCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return EsaApiFp(this.configuration)
       .updateComment(
         requestParameters.teamName,
         requestParameters.commentId,
         requestParameters.updateCommentBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5708,7 +5885,7 @@ export class EsaApi extends BaseAPI {
         requestParameters.teamName,
         requestParameters.postNumber,
         requestParameters.updatePostBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -5726,7 +5903,7 @@ export class EsaApi extends BaseAPI {
       .watchPost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }

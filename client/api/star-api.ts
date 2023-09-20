@@ -45,7 +45,7 @@ import { PaginatedStargazers } from "../models";
  * @export
  */
 export const StarApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -63,7 +63,7 @@ export const StarApiAxiosParamCreator = function (
       commentId: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getCommentStargazers", "teamName", teamName);
@@ -95,7 +95,7 @@ export const StarApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -104,7 +104,7 @@ export const StarApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -144,7 +144,7 @@ export const StarApiAxiosParamCreator = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getPostStargazers", "teamName", teamName);
@@ -176,7 +176,7 @@ export const StarApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -185,7 +185,7 @@ export const StarApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -223,7 +223,7 @@ export const StarApiAxiosParamCreator = function (
       teamName: string,
       commentId: number,
       newStar: NewStar,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("starComment", "teamName", teamName);
@@ -257,7 +257,7 @@ export const StarApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -266,7 +266,7 @@ export const StarApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -282,7 +282,7 @@ export const StarApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         newStar,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -303,7 +303,7 @@ export const StarApiAxiosParamCreator = function (
       teamName: string,
       postNumber: number,
       newStar: NewStar,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("starPost", "teamName", teamName);
@@ -337,7 +337,7 @@ export const StarApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -346,7 +346,7 @@ export const StarApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -362,7 +362,7 @@ export const StarApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         newStar,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -381,7 +381,7 @@ export const StarApiAxiosParamCreator = function (
     unstarComment: async (
       teamName: string,
       commentId: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("unstarComment", "teamName", teamName);
@@ -413,7 +413,7 @@ export const StarApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -422,7 +422,7 @@ export const StarApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -450,7 +450,7 @@ export const StarApiAxiosParamCreator = function (
     unstarPost: async (
       teamName: string,
       postNumber: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("unstarPost", "teamName", teamName);
@@ -482,7 +482,7 @@ export const StarApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -491,7 +491,7 @@ export const StarApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -533,25 +533,26 @@ export const StarApiFp = function (configuration?: Configuration) {
       commentId: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedStargazers>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getCommentStargazers(
-        teamName,
-        commentId,
-        page,
-        perPage,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getCommentStargazers(
+          teamName,
+          commentId,
+          page,
+          perPage,
+          options,
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -569,25 +570,26 @@ export const StarApiFp = function (configuration?: Configuration) {
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (
         axios?: AxiosInstance,
-        basePath?: string
+        basePath?: string,
       ) => AxiosPromise<PaginatedStargazers>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getPostStargazers(
-        teamName,
-        postNumber,
-        page,
-        perPage,
-        options
-      );
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getPostStargazers(
+          teamName,
+          postNumber,
+          page,
+          perPage,
+          options,
+        );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -603,7 +605,7 @@ export const StarApiFp = function (configuration?: Configuration) {
       teamName: string,
       commentId: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
@@ -611,13 +613,13 @@ export const StarApiFp = function (configuration?: Configuration) {
         teamName,
         commentId,
         newStar,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -633,7 +635,7 @@ export const StarApiFp = function (configuration?: Configuration) {
       teamName: string,
       postNumber: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
@@ -641,13 +643,13 @@ export const StarApiFp = function (configuration?: Configuration) {
         teamName,
         postNumber,
         newStar,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -661,20 +663,20 @@ export const StarApiFp = function (configuration?: Configuration) {
     async unstarComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.unstarComment(
         teamName,
         commentId,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -688,20 +690,20 @@ export const StarApiFp = function (configuration?: Configuration) {
     async unstarPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.unstarPost(
         teamName,
         postNumber,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -714,7 +716,7 @@ export const StarApiFp = function (configuration?: Configuration) {
 export const StarApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = StarApiFp(configuration);
   return {
@@ -733,7 +735,7 @@ export const StarApiFactory = function (
       commentId: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedStargazers> {
       return localVarFp
         .getCommentStargazers(teamName, commentId, page, perPage, options)
@@ -754,7 +756,7 @@ export const StarApiFactory = function (
       postNumber: number,
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedStargazers> {
       return localVarFp
         .getPostStargazers(teamName, postNumber, page, perPage, options)
@@ -773,7 +775,7 @@ export const StarApiFactory = function (
       teamName: string,
       commentId: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .starComment(teamName, commentId, newStar, options)
@@ -792,7 +794,7 @@ export const StarApiFactory = function (
       teamName: string,
       postNumber: number,
       newStar: NewStar,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .starPost(teamName, postNumber, newStar, options)
@@ -809,7 +811,7 @@ export const StarApiFactory = function (
     unstarComment(
       teamName: string,
       commentId: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .unstarComment(teamName, commentId, options)
@@ -826,7 +828,7 @@ export const StarApiFactory = function (
     unstarPost(
       teamName: string,
       postNumber: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .unstarPost(teamName, postNumber, options)
@@ -1020,7 +1022,7 @@ export class StarApi extends BaseAPI {
    */
   public getCommentStargazers(
     requestParameters: StarApiGetCommentStargazersRequest,
-    options?: any
+    options?: any,
   ) {
     return StarApiFp(this.configuration)
       .getCommentStargazers(
@@ -1028,7 +1030,7 @@ export class StarApi extends BaseAPI {
         requestParameters.commentId,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1043,7 +1045,7 @@ export class StarApi extends BaseAPI {
    */
   public getPostStargazers(
     requestParameters: StarApiGetPostStargazersRequest,
-    options?: any
+    options?: any,
   ) {
     return StarApiFp(this.configuration)
       .getPostStargazers(
@@ -1051,7 +1053,7 @@ export class StarApi extends BaseAPI {
         requestParameters.postNumber,
         requestParameters.page,
         requestParameters.perPage,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1066,14 +1068,14 @@ export class StarApi extends BaseAPI {
    */
   public starComment(
     requestParameters: StarApiStarCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return StarApiFp(this.configuration)
       .starComment(
         requestParameters.teamName,
         requestParameters.commentId,
         requestParameters.newStar,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1092,7 +1094,7 @@ export class StarApi extends BaseAPI {
         requestParameters.teamName,
         requestParameters.postNumber,
         requestParameters.newStar,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1107,13 +1109,13 @@ export class StarApi extends BaseAPI {
    */
   public unstarComment(
     requestParameters: StarApiUnstarCommentRequest,
-    options?: any
+    options?: any,
   ) {
     return StarApiFp(this.configuration)
       .unstarComment(
         requestParameters.teamName,
         requestParameters.commentId,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -1128,13 +1130,13 @@ export class StarApi extends BaseAPI {
    */
   public unstarPost(
     requestParameters: StarApiUnstarPostRequest,
-    options?: any
+    options?: any,
   ) {
     return StarApiFp(this.configuration)
       .unstarPost(
         requestParameters.teamName,
         requestParameters.postNumber,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }

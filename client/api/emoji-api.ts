@@ -47,7 +47,7 @@ import { EmojiList } from "../models";
  * @export
  */
 export const EmojiApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -61,7 +61,7 @@ export const EmojiApiAxiosParamCreator = function (
     createEmoji: async (
       teamName: string,
       createEmojiBody: CreateEmojiBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("createEmoji", "teamName", teamName);
@@ -69,7 +69,7 @@ export const EmojiApiAxiosParamCreator = function (
       assertParamExists("createEmoji", "createEmojiBody", createEmojiBody);
       const localVarPath = `/teams/{team_name}/emojis`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -94,7 +94,7 @@ export const EmojiApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -103,7 +103,7 @@ export const EmojiApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -119,7 +119,7 @@ export const EmojiApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         createEmojiBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -138,7 +138,7 @@ export const EmojiApiAxiosParamCreator = function (
     deleteEmoji: async (
       teamName: string,
       code: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("deleteEmoji", "teamName", teamName);
@@ -170,7 +170,7 @@ export const EmojiApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -179,7 +179,7 @@ export const EmojiApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -207,13 +207,13 @@ export const EmojiApiAxiosParamCreator = function (
     getEmojis: async (
       teamName: string,
       include?: "all",
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getEmojis", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/emojis`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -238,7 +238,7 @@ export const EmojiApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -247,7 +247,7 @@ export const EmojiApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (include !== undefined) {
@@ -289,20 +289,20 @@ export const EmojiApiFp = function (configuration?: Configuration) {
     async createEmoji(
       teamName: string,
       createEmojiBody: CreateEmojiBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreatedEmoji>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.createEmoji(
         teamName,
         createEmojiBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -316,20 +316,20 @@ export const EmojiApiFp = function (configuration?: Configuration) {
     async deleteEmoji(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.deleteEmoji(
         teamName,
         code,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -343,20 +343,20 @@ export const EmojiApiFp = function (configuration?: Configuration) {
     async getEmojis(
       teamName: string,
       include?: "all",
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmojiList>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getEmojis(
         teamName,
         include,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -369,7 +369,7 @@ export const EmojiApiFp = function (configuration?: Configuration) {
 export const EmojiApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = EmojiApiFp(configuration);
   return {
@@ -384,7 +384,7 @@ export const EmojiApiFactory = function (
     createEmoji(
       teamName: string,
       createEmojiBody: CreateEmojiBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<CreatedEmoji> {
       return localVarFp
         .createEmoji(teamName, createEmojiBody, options)
@@ -401,7 +401,7 @@ export const EmojiApiFactory = function (
     deleteEmoji(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .deleteEmoji(teamName, code, options)
@@ -418,7 +418,7 @@ export const EmojiApiFactory = function (
     getEmojis(
       teamName: string,
       include?: "all",
-      options?: any
+      options?: any,
     ): AxiosPromise<EmojiList> {
       return localVarFp
         .getEmojis(teamName, include, options)
@@ -507,13 +507,13 @@ export class EmojiApi extends BaseAPI {
    */
   public createEmoji(
     requestParameters: EmojiApiCreateEmojiRequest,
-    options?: any
+    options?: any,
   ) {
     return EmojiApiFp(this.configuration)
       .createEmoji(
         requestParameters.teamName,
         requestParameters.createEmojiBody,
-        options
+        options,
       )
       .then((request) => request(this.axios, this.basePath));
   }
@@ -528,7 +528,7 @@ export class EmojiApi extends BaseAPI {
    */
   public deleteEmoji(
     requestParameters: EmojiApiDeleteEmojiRequest,
-    options?: any
+    options?: any,
   ) {
     return EmojiApiFp(this.configuration)
       .deleteEmoji(requestParameters.teamName, requestParameters.code, options)

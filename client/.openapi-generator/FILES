@@ -10,6 +10,7 @@ api/invitation-api.ts
 api/member-api.ts
 api/post-api.ts
 api/star-api.ts
+api/tag-api.ts
 api/team-api.ts
 api/user-api.ts
 api/watch-api.ts
@@ -45,11 +46,13 @@ models/paginated-comments.ts
 models/paginated-members.ts
 models/paginated-posts.ts
 models/paginated-stargazers.ts
+models/paginated-tags.ts
 models/paginated-teams.ts
 models/paginated-watchers.ts
 models/post.ts
 models/sharing-urls.ts
 models/stargazer.ts
+models/tag.ts
 models/team-stats.ts
 models/team.ts
 models/update-comment-body.ts

@@ -47,7 +47,7 @@ import { TeamStats } from "../models";
  * @export
  */
 export const TeamApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -59,13 +59,13 @@ export const TeamApiAxiosParamCreator = function (
      */
     getTeam: async (
       teamName: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getTeam", "teamName", teamName);
       const localVarPath = `/teams/{team_name}`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -90,7 +90,7 @@ export const TeamApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -99,7 +99,7 @@ export const TeamApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -125,13 +125,13 @@ export const TeamApiAxiosParamCreator = function (
      */
     getTeamStats: async (
       teamName: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getTeamStats", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/stats`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -156,7 +156,7 @@ export const TeamApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -165,7 +165,7 @@ export const TeamApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -193,7 +193,7 @@ export const TeamApiAxiosParamCreator = function (
     getTeams: async (
       page?: number,
       perPage?: number,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       const localVarPath = `/teams`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -219,7 +219,7 @@ export const TeamApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -228,7 +228,7 @@ export const TeamApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       if (page !== undefined) {
@@ -272,19 +272,19 @@ export const TeamApiFp = function (configuration?: Configuration) {
      */
     async getTeam(
       teamName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getTeam(
         teamName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -296,19 +296,19 @@ export const TeamApiFp = function (configuration?: Configuration) {
      */
     async getTeamStats(
       teamName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TeamStats>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getTeamStats(
         teamName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -322,20 +322,20 @@ export const TeamApiFp = function (configuration?: Configuration) {
     async getTeams(
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedTeams>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getTeams(
         page,
         perPage,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -348,7 +348,7 @@ export const TeamApiFp = function (configuration?: Configuration) {
 export const TeamApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = TeamApiFp(configuration);
   return {
@@ -387,7 +387,7 @@ export const TeamApiFactory = function (
     getTeams(
       page?: number,
       perPage?: number,
-      options?: any
+      options?: any,
     ): AxiosPromise<PaginatedTeams> {
       return localVarFp
         .getTeams(page, perPage, options)
@@ -476,7 +476,7 @@ export class TeamApi extends BaseAPI {
    */
   public getTeamStats(
     requestParameters: TeamApiGetTeamStatsRequest,
-    options?: any
+    options?: any,
   ) {
     return TeamApiFp(this.configuration)
       .getTeamStats(requestParameters.teamName, options)
@@ -493,7 +493,7 @@ export class TeamApi extends BaseAPI {
    */
   public getTeams(
     requestParameters: TeamApiGetTeamsRequest = {},
-    options?: any
+    options?: any,
   ) {
     return TeamApiFp(this.configuration)
       .getTeams(requestParameters.page, requestParameters.perPage, options)

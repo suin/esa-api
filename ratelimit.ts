@@ -25,7 +25,7 @@ export class Ratelimit {
   }
 
   async cooldown(
-    timeoutMilliseconds: number = 15 * 60 * 1000 // 15 minutes
+    timeoutMilliseconds: number = 15 * 60 * 1000, // 15 minutes
   ): Promise<void> {
     if (this.remaining > 0) {
       return;
@@ -39,7 +39,7 @@ export class Ratelimit {
       await Promise.race([
         new Promise((resolve) => (timer1 = setTimeout(resolve, milliseconds))),
         new Promise(
-          (resolve) => (timer2 = setTimeout(resolve, timeoutMilliseconds))
+          (resolve) => (timer2 = setTimeout(resolve, timeoutMilliseconds)),
         ),
       ]);
     } finally {
@@ -64,11 +64,11 @@ declare module "axios" {
 export function setRatelimit(response: AxiosResponse): AxiosResponse;
 export function setRatelimit<T>(error: T): Promise<T>;
 export function setRatelimit<T>(
-  responseOrError: AxiosResponse | T
+  responseOrError: AxiosResponse | T,
 ): AxiosResponse | Promise<T> {
   let response: AxiosResponse | undefined;
   let returns: AxiosResponse | Promise<T>;
-  if ("headers" in responseOrError) {
+  if (isObject(responseOrError) && "headers" in responseOrError) {
     response = responseOrError;
     returns = responseOrError;
   } else {

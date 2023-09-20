@@ -45,7 +45,7 @@ import { InviteBody } from "../models";
  * @export
  */
 export const InvitationApiAxiosParamCreator = function (
-  configuration?: Configuration
+  configuration?: Configuration,
 ) {
   return {
     /**
@@ -59,7 +59,7 @@ export const InvitationApiAxiosParamCreator = function (
     disinvite: async (
       teamName: string,
       code: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("disinvite", "teamName", teamName);
@@ -91,7 +91,7 @@ export const InvitationApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -100,7 +100,7 @@ export const InvitationApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -126,13 +126,13 @@ export const InvitationApiAxiosParamCreator = function (
      */
     getInvitations: async (
       teamName: string,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("getInvitations", "teamName", teamName);
       const localVarPath = `/teams/{team_name}/invitations`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -157,7 +157,7 @@ export const InvitationApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -166,7 +166,7 @@ export const InvitationApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["read"],
-        configuration
+        configuration,
       );
 
       setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -194,7 +194,7 @@ export const InvitationApiAxiosParamCreator = function (
     invite: async (
       teamName: string,
       inviteBody: InviteBody,
-      options: any = {}
+      options: any = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'teamName' is not null or undefined
       assertParamExists("invite", "teamName", teamName);
@@ -202,7 +202,7 @@ export const InvitationApiAxiosParamCreator = function (
       assertParamExists("invite", "inviteBody", inviteBody);
       const localVarPath = `/teams/{team_name}/invitations`.replace(
         `{${"team_name"}}`,
-        encodeURIComponent(String(teamName))
+        encodeURIComponent(String(teamName)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -227,7 +227,7 @@ export const InvitationApiAxiosParamCreator = function (
       await setApiKeyToObject(
         localVarQueryParameter,
         "access_token",
-        configuration
+        configuration,
       );
 
       // authentication OAuth2 required
@@ -236,7 +236,7 @@ export const InvitationApiAxiosParamCreator = function (
         localVarHeaderParameter,
         "OAuth2",
         ["write"],
-        configuration
+        configuration,
       );
 
       localVarHeaderParameter["Content-Type"] = "application/json";
@@ -252,7 +252,7 @@ export const InvitationApiAxiosParamCreator = function (
       localVarRequestOptions.data = serializeDataIfNeeded(
         inviteBody,
         localVarRequestOptions,
-        configuration
+        configuration,
       );
 
       return {
@@ -268,9 +268,8 @@ export const InvitationApiAxiosParamCreator = function (
  * @export
  */
 export const InvitationApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = InvitationApiAxiosParamCreator(
-    configuration
-  );
+  const localVarAxiosParamCreator =
+    InvitationApiAxiosParamCreator(configuration);
   return {
     /**
      * 招待中のメンバーの招待を削除します。招待時に送信されたメールに記載された招待用のURLは無効となります。 このAPIは**team**の**owner**だけがご利用可能です。
@@ -283,20 +282,20 @@ export const InvitationApiFp = function (configuration?: Configuration) {
     async disinvite(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.disinvite(
         teamName,
         code,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -308,19 +307,19 @@ export const InvitationApiFp = function (configuration?: Configuration) {
      */
     async getInvitations(
       teamName: string,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvitationList>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getInvitations(
         teamName,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
     /**
@@ -334,20 +333,20 @@ export const InvitationApiFp = function (configuration?: Configuration) {
     async invite(
       teamName: string,
       inviteBody: InviteBody,
-      options?: any
+      options?: any,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvitationList>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.invite(
         teamName,
         inviteBody,
-        options
+        options,
       );
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
         BASE_PATH,
-        configuration
+        configuration,
       );
     },
   };
@@ -360,7 +359,7 @@ export const InvitationApiFp = function (configuration?: Configuration) {
 export const InvitationApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
-  axios?: AxiosInstance
+  axios?: AxiosInstance,
 ) {
   const localVarFp = InvitationApiFp(configuration);
   return {
@@ -375,7 +374,7 @@ export const InvitationApiFactory = function (
     disinvite(
       teamName: string,
       code: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<void> {
       return localVarFp
         .disinvite(teamName, code, options)
@@ -390,7 +389,7 @@ export const InvitationApiFactory = function (
      */
     getInvitations(
       teamName: string,
-      options?: any
+      options?: any,
     ): AxiosPromise<InvitationList> {
       return localVarFp
         .getInvitations(teamName, options)
@@ -407,7 +406,7 @@ export const InvitationApiFactory = function (
     invite(
       teamName: string,
       inviteBody: InviteBody,
-      options?: any
+      options?: any,
     ): AxiosPromise<InvitationList> {
       return localVarFp
         .invite(teamName, inviteBody, options)
@@ -489,7 +488,7 @@ export class InvitationApi extends BaseAPI {
    */
   public disinvite(
     requestParameters: InvitationApiDisinviteRequest,
-    options?: any
+    options?: any,
   ) {
     return InvitationApiFp(this.configuration)
       .disinvite(requestParameters.teamName, requestParameters.code, options)
@@ -506,7 +505,7 @@ export class InvitationApi extends BaseAPI {
    */
   public getInvitations(
     requestParameters: InvitationApiGetInvitationsRequest,
-    options?: any
+    options?: any,
   ) {
     return InvitationApiFp(this.configuration)
       .getInvitations(requestParameters.teamName, options)

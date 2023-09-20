@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* Basic Options */
     // "incremental": true,
-    "target": "es2017",
+    "target": "ES2022",
     "module": "commonjs",
     // "lib": [],
     // "allowJs": true,
@@ -33,10 +33,12 @@
     // "alwaysStrict": true,
 
     /* Additional Checks */
-    // "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitOverride": false,
 
     /* Module Resolution Options */
     // "moduleResolution": "node",
